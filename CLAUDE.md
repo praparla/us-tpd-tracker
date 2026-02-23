@@ -91,7 +91,7 @@ Deals are organized hierarchically:
 
 ### Stack
 
-- **Pipeline:** Python 3.11+, `httpx`, `beautifulsoup4`, `lxml`, `pydantic` v2
+- **Pipeline:** Python 3.9+, `httpx`, `beautifulsoup4`, `lxml`, `pydantic` v2
 - **AI Classification:** Anthropic Claude API (`anthropic` SDK) — `claude-3-5-haiku` default, `claude-opus-4-5` premium
 - **Frontend:** React 18 + Vite + Tailwind CSS v4, `recharts`, `lucide-react`, `date-fns`
 - **Data contract:** Static `data/deals.json` committed to repo
@@ -328,7 +328,7 @@ All layers ON by default (except Batch which is opt-in). Each layer logs its eff
 
 ## Rule 7: Python Standards
 
-- Python 3.11+. Type hints on all functions. Pydantic v2. `pathlib.Path`. `logging` module (no bare `print` except startup banners). All constants in `config.py`. Pinned `requirements.txt`.
+- Python 3.9+. Type hints on all functions. Pydantic v2. `pathlib.Path`. `logging` module (no bare `print` except startup banners). All constants in `config.py`. Pinned `requirements.txt`.
 - All pipeline commands require: `PYTHONPATH=. python3 pipeline/main.py`
 
 ## Rule 8: Frontend Standards
@@ -533,6 +533,7 @@ make run-quality     # Premium model
 make run-full        # No optimizations
 make dry-run         # Preview mode (no API key)
 make fetch-only      # Fetch + cache only
+make test            # Run data validation tests (31 tests)
 make dev             # Frontend dev server
 make build           # Production build
 make lint            # Ruff + Black check
@@ -549,9 +550,21 @@ export PATH="/Users/pranava/local/node/bin:$PATH"
 ### PYTHONPATH Required
 All pipeline commands need `PYTHONPATH=.` prefix (no setup.py/pyproject.toml).
 
+### Git Authentication
+The repo uses HTTPS with a personal access token. To push:
+```bash
+git remote set-url origin https://YOUR_TOKEN@github.com/praparla/us-tpd-tracker.git
+git push origin main
+```
+Generate a token at https://github.com/settings/tokens (needs `repo` scope).
+
 ---
 
 # Part 5: GitHub Deployment
+
+## Live Site
+
+https://praparla.github.io/us-tpd-tracker/
 
 ## Quick Deploy
 
@@ -559,6 +572,16 @@ All pipeline commands need `PYTHONPATH=.` prefix (no setup.py/pyproject.toml).
 git push origin main
 # GitHub Actions auto-builds and deploys frontend to GitHub Pages
 ```
+
+## First-Time Setup
+
+GitHub Pages must be enabled in repo settings:
+1. Go to https://github.com/praparla/us-tpd-tracker/settings/pages
+2. Source: **Deploy from a branch**
+3. Branch: **gh-pages** / **/ (root)**
+4. Click **Save**
+
+This only needs to be done once. After that, every push to `main` auto-deploys.
 
 ## Deployment Workflow
 
