@@ -100,8 +100,17 @@ def title_matches_watchlist(title: str, country_filter: Optional[str] = None) ->
     This is the cheapest possible filter — pure string matching,
     no AI, no network. Runs on listing page titles to decide which
     pages are worth fetching.
+
+    Match rules:
+    1. Country name + any tech/deal keyword → match
+    2. "prosperity" alone → match (TPD titles always include it)
+    3. Country name + TPD-specific phrase → match
     """
     title_lower = title.lower()
+
+    # Always match titles containing "prosperity" — core TPD term
+    if "prosperity" in title_lower:
+        return True
 
     # Check country match
     countries_to_check = COUNTRY_WATCHLIST
@@ -120,10 +129,19 @@ def title_matches_watchlist(title: str, country_filter: Optional[str] = None) ->
     if not country_match:
         return False
 
-    # Check tech OR deal keyword match
+    # Country found — check for tech OR deal keyword
     all_keywords = TECH_KEYWORDS + DEAL_KEYWORDS
     for kw in all_keywords:
         if kw.lower() in title_lower:
+            return True
+
+    # Also match country + broader TPD-related phrases
+    tpd_phrases = [
+        "billion", "deal", "state visit", "summit", "cooperation",
+        "joint statement", "fact sheet", "executive order",
+    ]
+    for phrase in tpd_phrases:
+        if phrase in title_lower:
             return True
 
     return False

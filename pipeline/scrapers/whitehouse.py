@@ -85,9 +85,7 @@ class WhiteHouseScraper(BaseScraper):
                 seen_urls.add(link)
 
                 # Cheap title-based filter — no network, no AI
-                # Also match "prosperity" alone (TPD titles always include it)
-                if not (title_matches_watchlist(title, self.country_filter)
-                        or "prosperity" in title.lower()):
+                if not title_matches_watchlist(title, self.country_filter):
                     continue
 
                 matched += 1
