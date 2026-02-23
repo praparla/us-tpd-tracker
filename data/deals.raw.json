@@ -1,0 +1,424 @@
+{
+  "meta": {
+    "generated_at": "2026-02-23T18:21:00.779333Z",
+    "deals_scanned": 212,
+    "deals_processed": 0,
+    "max_items_cap": 50,
+    "scraper_version": "1.0.0",
+    "countries_tracked": [
+      "GBR",
+      "JPN",
+      "KOR"
+    ],
+    "sources_scraped": [
+      "federal_register",
+      "whitehouse",
+      "commerce",
+      "ustr"
+    ],
+    "note": "Raw unclassified output \u2014 classification not yet run",
+    "errors": []
+  },
+  "raw_deals": [
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-The Customer Experience Hub",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/23/2026-03537/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-the-customer",
+      "source_id": "FR-2026-03537",
+      "snippet": "",
+      "raw_date": "2026-02-23",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Rapid Response Partnership Vehicle",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/23/2026-03517/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-rapid-response",
+      "source_id": "FR-2026-03517",
+      "snippet": "",
+      "raw_date": "2026-02-23",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Agency Information Collection Activities; Submission to the Office of Management and Budget (OMB) for Review and Approval; Comment Request; Request; Applications for Inclusion on the Lists of Arbitrators Under the Data Privacy Framework Program",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/23/2026-03470/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-omb-for",
+      "source_id": "FR-2026-03470",
+      "snippet": "The Department of Commerce, in accordance with the Paperwork Reduction Act of 1995 (PRA), invites the general public and other Federal agencies to comment on proposed and continuing information collections, which helps us assess the impact of our information collection requirements and minimize the public's reporting burden. The purpose of this notice is to allow for 60 days of public comment preceding submission of the collection to OMB.",
+      "raw_date": "2026-02-23",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Agency Information Collection Activities; Submission to the Office of Management and Budget (OMB) for Review and Approval; Comment Request; Self-Certifications Under the Data Privacy Framework Program",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/23/2026-03469/agency-information-collection-activities-submission-to-the-office-of-management-and-budget-omb-for",
+      "source_id": "FR-2026-03469",
+      "snippet": "The Department of Commerce, in accordance with the Paperwork Reduction Act of 1995 (PRA), invites the general public and other Federal agencies to comment on proposed and continuing information collections, which helps us assess the impact of our information collection requirements and minimize the public's reporting burden. The purpose of this notice is to allow for 60 days of public comment preceding submission of the collection to OMB.",
+      "raw_date": "2026-02-23",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Polycrystalline Diamond Compacts and Articles Containing Same; Notice of Commission Determination To Institute a Modification Proceeding and To Grant a Joint Motion for Limited Service of Confidential Exhibit; Modification of the Limited Exclusion Order; Termination of Modification Proceeding",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/19/2026-03229/certain-polycrystalline-diamond-compacts-and-articles-containing-same-notice-of-commission",
+      "source_id": "FR-2026-03229",
+      "snippet": "Notice is hereby given that the U.S. International Trade Commission (\"Commission\") has determined to institute a modification proceeding based on a joint petition to rescind the limited exclusion order (\"LEO\") as to respondent Shenzhen Haimingrun Superhard Materials Co., Ltd. (\"Haimingrun\"), and grant the joint motion for limited service of the confidential exhibit. The LEO is modified to remove reference to Haimingrun. The modification proceeding is terminated.",
+      "raw_date": "2026-02-19",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Float Glass Products From Malaysia: Final Affirmative Countervailing Duty Determination",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/09/2026-02491/float-glass-products-from-malaysia-final-affirmative-countervailing-duty-determination",
+      "source_id": "FR-2026-02491",
+      "snippet": "The U.S. Department of Commerce (Commerce) determines that countervailable subsidies are being provided to producers and exporters of float glass products (float glass) from Malaysia. The period of investigation is January 1, 2023, through December 31, 2023.",
+      "raw_date": "2026-02-09",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "United States v. Columbus McKinnon Corp., et al.; Proposed Final Judgment and Competitive Impact Statement",
+      "source_url": "https://www.federalregister.gov/documents/2026/02/03/2026-02185/united-states-v-columbus-mckinnon-corp-et-al-proposed-final-judgment-and-competitive-impact",
+      "source_id": "FR-2026-02185",
+      "snippet": "",
+      "raw_date": "2026-02-03",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Office of the Chief of Protocol; Gifts to Federal Employees From Foreign Government Sources Reported to Employing Agencies in Calendar Year 2024",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/29/2026-01805/office-of-the-chief-of-protocol-gifts-to-federal-employees-from-foreign-government-sources-reported",
+      "source_id": "FR-2026-01805",
+      "snippet": "",
+      "raw_date": "2026-01-29",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Streamlining Export Controls for Drone Exports",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/21/2026-01059/streamlining-export-controls-for-drone-exports",
+      "source_id": "FR-2026-01059",
+      "snippet": "The Bureau of Industry and Security (BIS) is easing export controls on certain civil Unmanned Aerial Vehicles (UAVs) and related technologies, which currently need a license to be exported to most countries. In particular, this interim final rule (IFR): a) allows less sensitive UAVs--namely, commercial UAVs with a maximum endurance of less than one hour, for which there is broad foreign availability--to be exported to most Wassenaar Arrangement Participating States (Country Group A:1) without a license; and b) allows more capable non-military UAVs--namely, certain long-range cargo delivery and agricultural spraying drones--to be exported to certain U.S. partners and allies (Country Group A:5) under License Exception Strategic Trade Authorization (STA). Exports pursuant to License Exception STA are subject to notification and reporting requirements to ensure the security of the exports. BIS is making these changes pursuant to Executive Order (E.O.) 14307, \"Unleashing American Drone Domi",
+      "raw_date": "2026-01-21",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Mercury Consortium, Inc.",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/20/2026-00961/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-mercury-consortium",
+      "source_id": "FR-2026-00961",
+      "snippet": "",
+      "raw_date": "2026-01-20",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Mobile Satellite Services Association",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/20/2026-00950/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-mobile-satellite",
+      "source_id": "FR-2026-00950",
+      "snippet": "",
+      "raw_date": "2026-01-20",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-DVD Copy Control Association",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/02/2025-24183/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-dvd-copy-control",
+      "source_id": "FR-2025-24183",
+      "snippet": "",
+      "raw_date": "2026-01-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Canton Foundation F/K/A Global Synchronizer Foundation",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/02/2025-24180/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-canton-foundation",
+      "source_id": "FR-2025-24180",
+      "snippet": "",
+      "raw_date": "2026-01-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-TeleManagement Forum",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/02/2025-24178/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-telemanagement-forum",
+      "source_id": "FR-2025-24178",
+      "snippet": "",
+      "raw_date": "2026-01-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Mobile Satellite Services Association",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/02/2025-24170/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-mobile-satellite",
+      "source_id": "FR-2025-24170",
+      "snippet": "",
+      "raw_date": "2026-01-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-MLCommons Association",
+      "source_url": "https://www.federalregister.gov/documents/2026/01/02/2025-24169/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-mlcommons",
+      "source_id": "FR-2025-24169",
+      "snippet": "",
+      "raw_date": "2026-01-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "International Traffic in Arms Regulations: Exemption for Defense Trade and Cooperation Among Australia, the United Kingdom, and the United States",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/30/2025-23998/international-traffic-in-arms-regulations-exemption-for-defense-trade-and-cooperation-among",
+      "source_id": "FR-2025-23998",
+      "snippet": "This rule streamlines defense trade and facilitates cooperation among our allies while reducing the regulatory burden for exporters, in support of the President's Executive Order 14268 of April 9, 2025, \"Reforming Foreign Defense Sales to Improve Speed and Accountability\". In this rule the Department of State (the Department) finalizes, with changes, the interim final rule published on August 20, 2024. The interim final rule made several amendments to the International Traffic in Arms Regulations (ITAR), pursuant to section 38(l) of the Arms Export Control Act (AECA), to facilitate defense trade and cooperation among Australia, the United Kingdom, and the United States, including through a new exemption to the licensing requirements of the ITAR. The Department is also now responding to public comments received on the interim final rule.",
+      "raw_date": "2025-12-30",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Hard Empty Capsules From the People's Republic of China: Final Affirmative Countervailing Duty Determination",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/29/2025-23825/hard-empty-capsules-from-the-peoples-republic-of-china-final-affirmative-countervailing-duty",
+      "source_id": "FR-2025-23825",
+      "snippet": "The U.S. Department of Commerce (Commerce) determines that countervailable subsidies are being provided to producers and exporters of hard empty capsules (capsules) from the People's Republic of China (China). The period of investigation is January 1, 2023, through December 31, 2023.",
+      "raw_date": "2025-12-29",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Global Benchmark for Efficient Drug Pricing (GLOBE) Model",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/23/2025-23702/global-benchmark-for-efficient-drug-pricing-globe-model",
+      "source_id": "FR-2025-23702",
+      "snippet": "This proposed rule proposes to implement the Global Benchmark for Efficient Drug Pricing Model (\"GLOBE Model\"), a new Medicare payment model under section 1115A of the Social Security Act (the Act). The GLOBE Model would test whether a payment model that uses an alternative method for calculating Part B inflation rebate amounts for certain separately payable Part B drugs and biologicals products reduces costs for Medicare fee-for-service (FFS) beneficiaries and the Medicare program while preserving quality of care.",
+      "raw_date": "2025-12-23",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Smart Wearable Devices, Systems, and Components Thereof; Institution of Investigation",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/22/2025-23584/certain-smart-wearable-devices-systems-and-components-thereof-institution-of-investigation",
+      "source_id": "FR-2025-23584",
+      "snippet": "Notice is hereby given that a complaint was filed with the U.S. International Trade Commission on November 18, 2025, under section 337 of the Tariff Act of 1930, as amended, on behalf of Ouraring Inc. of San Francisco, California. An amended complaint was filed on December 9, 2025. The amended complaint alleges violations of section 337 based upon the importation into the United States, the sale for importation, and the sale within the United States after importation of certain smart wearable devices, systems, and components thereof by reason of the infringement of certain claims of U.S. Patent No. 11,868,178 (\"the '178 patent\"); U.S. Patent No. 12,353,244 (\"the '244 patent\"); U.S. Patent No. 12,346,159 (\"the '159 patent\"); and U.S. Patent No. 12,222,759 (\"the '759 patent\"). The amended complaint further alleges that an industry in the United States exists as required by the applicable Federal Statute. The complainant requests that the Commission institute an investigation and, after t",
+      "raw_date": "2025-12-22",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice of 2024 Department of State Sanctions Actions Pursuant to the Executive Order Regarding Blocking Property With Respect to Specified Harmful Foreign Activities of the Government of the Russian Federation",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/17/2025-23017/notice-of-2024-department-of-state-sanctions-actions-pursuant-to-the-executive-order-regarding",
+      "source_id": "FR-2025-23017",
+      "snippet": "The Department of State is publishing the names of one or more persons that were placed on the Department of Treasury's List of Specially Designated Nationals and Blocked Persons (SDN List) administered by the Office of Foreign Asset Control (OFAC) in 2024 based on the Department of State's determination, in consultation with other departments, as appropriate, that one or more applicable legal criteria of the Executive Order regarding blocking property with respect to specified harmful foreign activities of the Government of the Russian Federation were satisfied. All property and interests in property subject to U.S. jurisdiction of these persons are blocked, and U.S. persons are generally prohibited from engaging in transactions with them.",
+      "raw_date": "2025-12-17",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Smart Wearable Devices, Systems, and Components Thereof; Notice of Commission Determination To Institute Modification and Rescission Proceedings and To Grant a Joint Petition for Limited Service of Confidential Exhibit; Modification of Limited Exclusion Order and Rescission of Cease and Desist Orders; Termination of Modification and Rescission Proceedings",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/12/2025-22586/certain-smart-wearable-devices-systems-and-components-thereof-notice-of-commission-determination-to",
+      "source_id": "FR-2025-22586",
+      "snippet": "Notice is hereby given that the U.S. International Trade Commission has determined to (i) institute modification and rescission proceedings based on a joint petition to rescind the limited exclusion order (\"LEO\") as to respondents RingConn LLC and Shenzhen Ninenovo Technology Limited (collectively, \"RingConn\") and rescind in full cease and desist orders (\"CDOs\") as to RingConn, and (ii) grant the joint petition for limited service of the confidential exhibit. The LEO is modified to remove reference to RingConn and the CDOs as to RingConn are rescinded. The modification and rescission proceedings are terminated.",
+      "raw_date": "2025-12-12",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Polycrystalline Diamond Compacts and Articles Containing Same; Notice of a Final Determination Finding a Violation of Section 337 and Issuing a Limited Exclusion Order and a Cease and Desist Order; Termination of Investigation",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/09/2025-22313/certain-polycrystalline-diamond-compacts-and-articles-containing-same-notice-of-a-final",
+      "source_id": "FR-2025-22313",
+      "snippet": "Notice is hereby given that the U.S. International Trade Commission (\"Commission\") has determined that respondents SF Diamond Co., Ltd. of Henan, China, and SF Diamond USA, Inc. of Spring, Texas (together, \"SF Diamond\"); Iljin Diamond Co., Ltd. of Seoul, Republic of Korea, Iljin Holdings Co., Ltd. of Seoul, Republic of Korea, Iljin USA Inc. of Houston, Texas, Iljin Europe GmbH of Eschborn, Germany, Iljin Japan Co., Ltd. of Tokyo, Japan, Iljin China Co., Ltd. of Shanghai, China (collectively, \"Iljin\"); Henan Jingrui New Material Technology Co., Ltd. (\"Jingrui\") of Henan, China; Zhenzghou New Asia Superhard Materials Composite Co., Ltd. (\"New Asia\") of Henan, China; International Diamond Services, Inc. (\"IDS\") of Houston, Texas; CR Gems Superabrasives Co., Ltd. (\"CR Gems\") of Shanghai, China; Fujian Wanlong Superhard Material Technology Co., Ltd. (\"Wanlong\") of Fujian, China; Guangdong Juxin Materials Technology Co., Inc. (\"Juxin\") of Guangdong, China; and Shenzhen Haimingrun Superhard M",
+      "raw_date": "2025-12-09",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Initiation of Antidumping and Countervailing Duty Administrative Reviews",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/08/2025-22202/initiation-of-antidumping-and-countervailing-duty-administrative-reviews",
+      "source_id": "FR-2025-22202",
+      "snippet": "The U.S. Department of Commerce (Commerce) has received requests to conduct administrative reviews of various antidumping duty (AD) and countervailing duty (CVD) orders with September anniversary dates. In accordance with Commerce's regulations, we are initiating those administrative reviews.",
+      "raw_date": "2025-12-08",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Agency Information Collection Activities; Revision; Entry Summary",
+      "source_url": "https://www.federalregister.gov/documents/2025/12/01/2025-21607/agency-information-collection-activities-revision-entry-summary",
+      "source_id": "FR-2025-21607",
+      "snippet": "The Department of Homeland Security, U.S. Customs and Border Protection (CBP) will be submitting the following information collection request to the Office of Management and Budget (OMB) for review and approval in accordance with the Paperwork Reduction Act of 1995 (PRA). The information collection is published in the Federal Register to obtain comments from the public and affected agencies.",
+      "raw_date": "2025-12-01",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "In the Matter of: Varun Maharajh a/k/a Kelvin Singh, Inmate Number: 92279-510, MCFP Springfield, Federal Medical Center, P.O. Box 4000, Springfield, MO 65801; Order Denying Export Privileges",
+      "source_url": "https://www.federalregister.gov/documents/2025/11/26/2025-21105/in-the-matter-of-varun-maharajh-aka-kelvin-singh-inmate-number-92279-510-mcfp-springfield-federal",
+      "source_id": "FR-2025-21105",
+      "snippet": "",
+      "raw_date": "2025-11-26",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice of Receipt of Complaint; Solicitation of Comments Relating to the Public Interest",
+      "source_url": "https://www.federalregister.gov/documents/2025/11/21/2025-20647/notice-of-receipt-of-complaint-solicitation-of-comments-relating-to-the-public-interest",
+      "source_id": "FR-2025-20647",
+      "snippet": "Notice is hereby given that the U.S. International Trade Commission has received a complaint entitled Certain Smart Wearable Devices, Systems, and Components Thereof, DN 3858; the Commission is soliciting comments on any public interest issues raised by the complaint or complainant's filing pursuant to the Commission's Rules of Practice and Procedure.",
+      "raw_date": "2025-11-21",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Enhanced Transparency and Public Accountability of the Supervisory Stress Test Models and Scenarios; Modifications to the Capital Planning and Stress Capital Buffer Requirement Rule, Enhanced Prudential Standards Rule, and Regulation LL",
+      "source_url": "https://www.federalregister.gov/documents/2025/11/18/2025-20211/enhanced-transparency-and-public-accountability-of-the-supervisory-stress-test-models-and-scenarios",
+      "source_id": "FR-2025-20211",
+      "snippet": "The Board is inviting public comment on the models used to conduct the Board's supervisory stress test, changes to those models to be implemented in the 2026 stress test, and proposed changes to enhance the transparency and public accountability of the Board's stress testing framework (the proposal). The proposal would amend the Policy Statement on the Scenario Design Framework for Stress Testing, including to implement guides for additional scenario variables, and the Stress Testing Policy Statement. The proposal would also codify an enhanced disclosure process under which the Board would annually publish comprehensive documentation on the stress test models, invite public comment on any material changes that the Board seeks to make to those models, and annually publish the stress test scenarios for comment. Lastly, the proposal would make changes to the FR Y-14A/Q/M to remove items that are no longer needed to conduct the supervisory stress test and to collect additional data to supp",
+      "raw_date": "2025-11-18",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Protection of Stratospheric Ozone: Listing of Substitutes Under the Significant New Alternatives Policy Program in Refrigeration and Air Conditioning and Fire Suppression",
+      "source_url": "https://www.federalregister.gov/documents/2025/11/10/2025-19812/protection-of-stratospheric-ozone-listing-of-substitutes-under-the-significant-new-alternatives",
+      "source_id": "FR-2025-19812",
+      "snippet": "Pursuant to the U.S. Environmental Protection Agency's Significant New Alternatives Policy program, this action proposes to list several substitutes as acceptable, subject to use conditions, for residential and light commercial air conditioning and heat pumps, chillers, household refrigerators and freezers, motor vehicle air conditioning, and fire suppression and explosion protection. This action also proposes to update use conditions for substitutes previously listed for certain air conditioning end-uses and for water coolers.",
+      "raw_date": "2025-11-10",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Collection and Use of Biometrics by U.S. Citizenship and Immigration Services",
+      "source_url": "https://www.federalregister.gov/documents/2025/11/03/2025-19747/collection-and-use-of-biometrics-by-us-citizenship-and-immigration-services",
+      "source_id": "FR-2025-19747",
+      "snippet": "The U.S. Department of Homeland Security (DHS) proposes to amend its regulations governing biometrics use and collection. DHS proposes to require submission of biometrics by any individual, regardless of age, filing or associated with an immigration benefit request, other request, or collection of information, unless exempted; expand biometrics collection authority upon alien arrest; define \"biometrics;\" codify reuse requirements; codify and expand DNA testing, use and storage; establish an \"extraordinary circumstances\" standard to excuse a failure to appear at a biometric services appointment; modify how VAWA self-petitioners and T nonimmigrant status applicants demonstrate good moral character; and clarify biometrics collection purposes.",
+      "raw_date": "2025-11-03",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Order Renewing Order Temporarily Denying Export Privileges",
+      "source_url": "https://www.federalregister.gov/documents/2025/10/31/2025-19727/order-renewing-order-temporarily-denying-export-privileges",
+      "source_id": "FR-2025-19727",
+      "snippet": "",
+      "raw_date": "2025-10-31",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Imposition of Special Measure Regarding Huione Group, as a Foreign Financial Institution of Primary Money Laundering Concern",
+      "source_url": "https://www.federalregister.gov/documents/2025/10/16/2025-19571/imposition-of-special-measure-regarding-huione-group-as-a-foreign-financial-institution-of-primary",
+      "source_id": "FR-2025-19571",
+      "snippet": "FinCEN is issuing this final rule to prohibit covered U.S. financial institutions from opening or maintaining a correspondent account for, or on behalf of Huione Group, a foreign financial institution based in Cambodia found to be of primary money laundering concern pursuant to section 311 of the USA PATRIOT Act. The rule further requires covered financial institutions to apply special due diligence to their foreign correspondent accounts that is reasonably designed to guard against the use of such accounts to process transactions involving Huione Group.",
+      "raw_date": "2025-10-16",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-The Open Group, L.L.C.",
+      "source_url": "https://www.federalregister.gov/documents/2025/10/03/2025-19380/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-the-open-group-llc",
+      "source_id": "FR-2025-19380",
+      "snippet": "",
+      "raw_date": "2025-10-03",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Silicon Integration Initiative, Inc.",
+      "source_url": "https://www.federalregister.gov/documents/2025/10/02/2025-19309/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-silicon-integration",
+      "source_id": "FR-2025-19309",
+      "snippet": "",
+      "raw_date": "2025-10-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Revision of Firearms License Requirements",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/30/2025-18992/revision-of-firearms-license-requirements",
+      "source_id": "FR-2025-18992",
+      "snippet": "On April 30, 2024, the Bureau of Industry and Security (BIS) published an interim final rule (Firearms IFR) that imposed new export license requirements for firearms and related ammunition and components. American firearms manufacturers estimated that these regulatory restrictions would cost them hundreds of millions of dollars per year in lost sales. BIS, informed by public comments on the Firearms IFR, has determined that the Firearms IFR should be rescinded in its entirety--with the only exception being to maintain new Export Control Classification Numbers (ECCNs). This final rule also amends the EAR by removing the Congressional notification requirement for certain semi-automatic firearms license applications. By restoring export controls on firearms to the state they were in at the end of the first Trump Administration, BIS is advancing the Administration's commitment to reducing regulatory burdens on industry and law-abiding firearms owners.",
+      "raw_date": "2025-09-30",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Thermoformed Molded Fiber Products From the Socialist Republic of Vietnam: Final Affirmative Countervailing Duty Determination and Final Affirmative Critical Circumstances Determination",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/30/2025-18899/thermoformed-molded-fiber-products-from-the-socialist-republic-of-vietnam-final-affirmative",
+      "source_id": "FR-2025-18899",
+      "snippet": "The U.S. Department of Commerce (Commerce) determines that countervailable subsidies are being provided to producers and exporters of thermoformed molded fiber products (molded fiber products) from the Socialist Republic of Vietnam (Vietnam) during the period of investigation (POI), January 1, 2023, through December 31, 2023.",
+      "raw_date": "2025-09-30",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Thermoformed Molded Fiber Products From the People's Republic of China: Final Affirmative Countervailing Duty Determination",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/30/2025-18892/thermoformed-molded-fiber-products-from-the-peoples-republic-of-china-final-affirmative",
+      "source_id": "FR-2025-18892",
+      "snippet": "The U.S. Department of Commerce (Commerce) determines that countervailable subsidies are being provided to producers and exporters of thermoformed molded fiber products (molded fiber products) from the People's Republic of China (China). The period of investigation (POI) is January 1, 2023, through December 31, 2023.",
+      "raw_date": "2025-09-30",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Thermoformed Molded Fiber Products From the People's Republic of China: Final Affirmative Determination of Sales at Less Than Fair Value",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/30/2025-18891/thermoformed-molded-fiber-products-from-the-peoples-republic-of-china-final-affirmative",
+      "source_id": "FR-2025-18891",
+      "snippet": "The U.S. Department of Commerce (Commerce) determines that thermoformed molded fiber products (molded fiber products) from the People's Republic of China (China) are being, or are likely to be, sold in the United States at less than fair value (LTFV) during the period of investigation (POI) April 1, 2025, through September 30, 2025.",
+      "raw_date": "2025-09-30",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Thermoformed Molded Fiber Products From the Socialist Republic of Vietnam: Final Affirmative Determination of Sales at Less Than Fair Value",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/30/2025-18890/thermoformed-molded-fiber-products-from-the-socialist-republic-of-vietnam-final-affirmative",
+      "source_id": "FR-2025-18890",
+      "snippet": "The U.S. Department of Commerce (Commerce) determines that thermoformed molded fiber products (molded fiber products) from the Socialist Republic of Vietnam (Vietnam) are being, or are likely to be, sold in the United States at less than fair value (LTFV). The period of investigation (POI) is April 1, 2024, through September 30, 2024.",
+      "raw_date": "2025-09-30",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Agency Information Collection Activities; Revision; Entry Summary",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/29/2025-18849/agency-information-collection-activities-revision-entry-summary",
+      "source_id": "FR-2025-18849",
+      "snippet": "The Department of Homeland Security, U.S. Customs and Border Protection (CBP) will be submitting the following information collection request to the Office of Management and Budget (OMB) for review and approval in accordance with the Paperwork Reduction Act of 1995 (PRA). The information collection is published in the Federal Register to obtain comments from the public and affected agencies.",
+      "raw_date": "2025-09-29",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Electronic Eyewear Products, Components Thereof, and Related Charging Apparatuses; Notice of Commission Determination Not To Review an Initial Determination Terminating the Investigation With Respect to Five Respondents Based on Settlement; Termination of the Investigation",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/25/2025-18532/certain-electronic-eyewear-products-components-thereof-and-related-charging-apparatuses-notice-of",
+      "source_id": "FR-2025-18532",
+      "snippet": "Notice is hereby given that the U.S. International Trade Commission has determined not to review an initial determination (\"ID\") (Order No. 32) of the presiding administrative law judge (\"ALJ\") terminating the investigation with respect to the remaining respondents Bytedance, Ltd.; Bytedance Inc.; Qingdao Chuangjian Weilai Technology Co., Ltd.; Funnico Inc.; and PICO Immersive Pte. Ltd. based on settlement. The investigation is terminated.",
+      "raw_date": "2025-09-25",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Request for Comments on Significant Foreign Trade Barriers for the 2026 National Trade Estimate Report",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/15/2025-17782/request-for-comments-on-significant-foreign-trade-barriers-for-the-2026-national-trade-estimate",
+      "source_id": "FR-2025-17782",
+      "snippet": "The Office of the United States Trade Representative (USTR), through the Trade Policy Staff Committee (TPSC), publishes the National Trade Estimate Report on Foreign Trade Barriers (NTE Report) each year. USTR invites comments to assist it and the TPSC in identifying significant foreign barriers to, or distortions of, U.S. exports of goods and services and U.S. foreign direct investment for inclusion in the NTE Report. USTR also will consider responses to this notice as part of the annual review of the operation and effectiveness of all U.S. trade agreements regarding telecommunications products and services that are in force with respect to the United States.",
+      "raw_date": "2025-09-15",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Implementation of Fish and Fish Product Import Provisions of the Marine Mammal Protection Act-Notification of Comparability Findings and Implementation of Import Restrictions; Certification of Admissibility for Certain Fish Products",
+      "source_url": "https://www.federalregister.gov/documents/2025/09/02/2025-16776/implementation-of-fish-and-fish-product-import-provisions-of-the-marine-mammal-protection",
+      "source_id": "FR-2025-16776",
+      "snippet": "Under the authority of the Marine Mammal Protection Act (MMPA), the NMFS Assistant Administrator for Fisheries (Assistant Administrator) announces comparability finding determinations for all fisheries on the List of Foreign Fisheries (LOFF) for harvesting nations that export fish and fish products to the United States. Nations whose fisheries were denied comparability findings will be prohibited from importing fish and fish products from those fisheries into the United States beginning January 1, 2026. Until such time as the import restrictions imposed by this action are lifted or revised, trade restrictions on these products associated with the fisheries for which a comparability finding has been denied will continue and Certification of Admissibility will be required.",
+      "raw_date": "2025-09-02",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Phasedown of Hydrofluorocarbons: Review and Renewal of Eligibility for Application-Specific Allowances",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/26/2025-16357/phasedown-of-hydrofluorocarbons-review-and-renewal-of-eligibility-for-application-specific",
+      "source_id": "FR-2025-16357",
+      "snippet": "The U.S. Environmental Protection Agency (EPA) is finalizing, pursuant to the statutory framework established in the American Innovation and Manufacturing Act of 2020 (AIM Act), the eligibility of six applications to continue to receive priority access to allowances to produce or import hydrofluorocarbons. In this final rule, EPA establishes the framework for how EPA interprets the statutory criteria for assessing whether to renew the eligibility of applications to receive application-specific allowances and sets out determinations to renew or not renew each of the six applications that currently receive application-specific allowances. EPA is also finalizing revisions to the Technology Transitions regulations relevant to the specific applications under review, a procedural process for submitting a petition to designate a new application as eligible for priority access to allowances, the methodology used to allocate allowances to application-specific allowance holders for calendar year",
+      "raw_date": "2025-08-26",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Smart Wearable Devices, Systems, and Components Thereof; Notice of the Commission's Final Determination Finding a Violation of Section 337; Issuance of a Limited Exclusion Order and Cease and Desist Orders; Termination of the Investigation",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/26/2025-16316/certain-smart-wearable-devices-systems-and-components-thereof-notice-of-the-commissions-final",
+      "source_id": "FR-2025-16316",
+      "snippet": "Notice is hereby given that the U.S. International Trade Commission has found a violation of section 337 in the above-captioned investigation. The Commission has determined to issue: (1) a limited exclusion (\"LEO\") prohibiting the unlicensed entry of infringing smart wearable devices, systems, and components thereof that are manufactured by or on behalf of, or imported by or on behalf of, the respondents; and (2) cease and desist orders (\"CDOs\") against five respondents. The investigation is terminated.",
+      "raw_date": "2025-08-26",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Certain Paper Plates From the People's Republic of China: Initiation of Circumvention Inquires on the Antidumping and Countervailing Duty Orders",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/22/2025-16164/certain-paper-plates-from-the-peoples-republic-of-china-initiation-of-circumvention-inquires-on-the",
+      "source_id": "FR-2025-16164",
+      "snippet": "In response to a request from the Anticircumvention Working Group of the American Paper Plate Coalition (AWG) (collectively, the requesters), the U.S. Department of Commerce (Commerce) is initiating country-wide circumvention inquiries to determine whether imports of certain paper plates (paper plates) completed in the Kingdom of Cambodia (Cambodia) or Malaysia (collectively, the third countries) using paperboard manufactured in the People's Republic of China (China), are circumventing the antidumping (AD) and countervailing duty (CVD) orders on paper plates from China.",
+      "raw_date": "2025-08-22",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Self-Regulatory Organizations; NYSE Arca, Inc.; Notice of Filing of Amendment No. 2 to a Proposed Rule Change To List and Trade Shares of the Grayscale Solana Trust Under NYSE Arca Rule 8.201-E (Commodity-Based Trust Shares)",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/19/2025-15734/self-regulatory-organizations-nyse-arca-inc-notice-of-filing-of-amendment-no-2-to-a-proposed-rule",
+      "source_id": "FR-2025-15734",
+      "snippet": "",
+      "raw_date": "2025-08-19",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Mercury Consortium, Inc.",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/18/2025-15695/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-mercury-consortium",
+      "source_id": "FR-2025-15695",
+      "snippet": "",
+      "raw_date": "2025-08-18",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-Rust Foundation",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/18/2025-15692/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-rust-foundation",
+      "source_id": "FR-2025-15692",
+      "snippet": "",
+      "raw_date": "2025-08-18",
+      "source_name": "federal_register"
+    },
+    {
+      "title": "Notice Pursuant to the National Cooperative Research and Production Act of 1993-MLCommons Association",
+      "source_url": "https://www.federalregister.gov/documents/2025/08/18/2025-15684/notice-pursuant-to-the-national-cooperative-research-and-production-act-of-1993-mlcommons",
+      "source_id": "FR-2025-15684",
+      "snippet": "",
+      "raw_date": "2025-08-18",
+      "source_name": "federal_register"
+    }
+  ]
+}
