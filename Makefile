@@ -1,4 +1,4 @@
-.PHONY: run run-quality run-full run-batch collect-batch dev build deploy lint dry-run help setup-dev
+.PHONY: run run-quality run-full run-batch collect-batch dev build deploy lint dry-run help setup-dev test
 
 help: ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -25,6 +25,9 @@ dry-run: ## Preview what would be processed (no API key needed)
 
 fetch-only: ## Fetch and cache pages only, no classification
 	PYTHONPATH=. python3 pipeline/main.py --fetch-only
+
+test: ## Run data validation tests
+	PYTHONPATH=. python3 -m pytest tests/ -v
 
 lint: ## Run ruff + black check on pipeline/
 	ruff check pipeline/ && black --check pipeline/
