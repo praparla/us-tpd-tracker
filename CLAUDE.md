@@ -135,8 +135,14 @@ us-tpd-tracker/
 │   ├── vite.config.js
 │   └── package.json
 ├── tests/
+│   ├── conftest.py              ← shared fixtures
 │   ├── test_data_validation.py  ← validates deals.json schema + content
-│   └── conftest.py
+│   ├── test_urls.py             ← URL format, domains, consistency
+│   ├── test_cache.py            ← disk cache module unit tests
+│   ├── test_models.py           ← Pydantic model validation
+│   ├── test_config.py           ← watchlist, keywords, sources config
+│   ├── test_classifier.py       ← pre-filter, truncation, parse logic
+│   └── test_scrapers.py         ← HTML extraction, title matching
 ├── data/
 │   ├── deals.json               ← pipeline output — COMMITTED
 │   ├── deals.sample.json        ← mock data for frontend dev
@@ -442,16 +448,24 @@ Run all tests with:
 PYTHONPATH=. python3 -m pytest tests/ -v
 ```
 
-Test coverage:
+Test suite: **154 tests** across 7 test files.
+
+| Test File | Tests | What It Covers |
+|-----------|-------|----------------|
+| `test_data_validation.py` | 31 | Schema validation, hierarchy, content quality, scraper filters |
+| `test_urls.py` | 12 | URL format, HTTPS, government domains, consistency |
+| `test_cache.py` | 20 | url_hash, content_hash, page cache, classification cache, clearing |
+| `test_models.py` | 19 | Pydantic models, enums, validation constraints |
+| `test_config.py` | 22 | Watchlist structure, keywords, sources, network constants |
+| `test_classifier.py` | 23 | Pre-filter, truncation, parse results, cost estimation |
+| `test_scrapers.py` | 27 | HTML extraction, title matching, country filter logic |
+
+Additional test modes:
 - `--dry-run` works without API key — `make dry-run`
 - `data/deals.sample.json` committed with mock entries for frontend dev
-- `tests/test_data_validation.py` validates:
-  - `deals.json` and `deals.sample.json` conform to Pydantic schema
-  - Every child deal references a valid parent
-  - All required fields are present and properly typed
-  - Country codes match the watchlist
-  - Deal values are non-negative when present
-  - No duplicate IDs
+
+### Known URL Behavior
+White House URLs may use either slug-based (`/fact-sheet-title-here/`) or numeric (`/28195/`) paths. The numeric form is more stable — slug URLs have been observed to 404 after publication. The test suite validates all URLs in data files are well-formed and point to known government domains.
 
 ## Rule 14: Security & Credential Handling
 
@@ -533,7 +547,7 @@ make run-quality     # Premium model
 make run-full        # No optimizations
 make dry-run         # Preview mode (no API key)
 make fetch-only      # Fetch + cache only
-make test            # Run data validation tests (31 tests)
+make test            # Run all tests (154 tests)
 make dev             # Frontend dev server
 make build           # Production build
 make lint            # Ruff + Black check
@@ -549,6 +563,9 @@ export PATH="/Users/pranava/local/node/bin:$PATH"
 
 ### PYTHONPATH Required
 All pipeline commands need `PYTHONPATH=.` prefix (no setup.py/pyproject.toml).
+
+### White House URL Instability
+Some whitehouse.gov pages use slug-based URLs (e.g. `/fact-sheet-title-here/`) that can 404 after publication. The numeric URL form (e.g. `/fact-sheets/2025/10/28195/`) is more stable. When adding URLs to `deals.json`, prefer the numeric form when available. The test suite (`test_urls.py`) validates all URLs are well-formed.
 
 ### Git Authentication
 The repo uses HTTPS with a personal access token. To push:

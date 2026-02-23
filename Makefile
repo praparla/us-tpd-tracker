@@ -26,7 +26,7 @@ dry-run: ## Preview what would be processed (no API key needed)
 fetch-only: ## Fetch and cache pages only, no classification
 	PYTHONPATH=. python3 pipeline/main.py --fetch-only
 
-test: ## Run data validation tests
+test: ## Run all tests (154 tests: data validation, URLs, cache, models, config, classifier, scrapers)
 	PYTHONPATH=. python3 -m pytest tests/ -v
 
 lint: ## Run ruff + black check on pipeline/

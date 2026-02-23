@@ -4,9 +4,13 @@ A static web dashboard that tracks US bilateral Technology Prosperity Deals (TPD
 
 Scrapes White House fact sheets, Federal Register, Commerce.gov, and USTR.gov to build a structured, hierarchical view of framework agreements and their associated corporate investment commitments.
 
+**Live site:** https://praparla.github.io/us-tpd-tracker/
+
 ## Status
 
-**MVP — In Development**
+**MVP — Deployed.** Frontend live on GitHub Pages. Data manually curated from verified government sources.
+
+Current data: 42 deals (3 parent TPDs + 39 child commitments) across UK, Japan, and South Korea.
 
 ## Quick Start
 
@@ -24,6 +28,9 @@ make run
 # Start frontend dev server
 cd frontend && npm install && cd ..
 make dev
+
+# Run tests
+make test
 ```
 
 ## Architecture
@@ -57,10 +64,28 @@ Local Pipeline (Python)          GitHub Actions           GitHub Pages
 
 Adding a new country = one entry in `pipeline/config.py`. All scrapers pick it up automatically.
 
+## Testing
+
+**154 tests** across 7 test files:
+
+```bash
+make test    # or: PYTHONPATH=. python3 -m pytest tests/ -v
+```
+
+| Test File | Tests | Coverage |
+|-----------|-------|----------|
+| `test_data_validation.py` | 31 | Schema, hierarchy, content quality |
+| `test_urls.py` | 12 | URL format, HTTPS, government domains |
+| `test_cache.py` | 20 | Disk cache read/write/clear |
+| `test_models.py` | 19 | Pydantic models and enums |
+| `test_config.py` | 22 | Watchlist, keywords, sources |
+| `test_classifier.py` | 23 | Pre-filter, truncation, cost estimation |
+| `test_scrapers.py` | 27 | HTML extraction, title matching |
+
 ## CLI Reference
 
 ```bash
-python pipeline/main.py [OPTIONS]
+PYTHONPATH=. python3 pipeline/main.py [OPTIONS]
 
 Options:
   --dry-run          Preview what would be processed (no API key needed)
@@ -83,6 +108,7 @@ make run-quality     # Premium model
 make run-full        # No optimizations
 make dry-run         # Preview mode (no API key)
 make fetch-only      # Fetch + cache only
+make test            # Run all tests (154 tests)
 make dev             # Frontend dev server
 make build           # Production build
 make lint            # Ruff + Black check
