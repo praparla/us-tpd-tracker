@@ -91,8 +91,8 @@ def main() -> None:
         format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
     )
 
-    # MVP cap banner
-    print(f"\u26a0\ufe0f  MVP CAP: Processing limited to {MAX_DEALS_TO_PROCESS} deals")
+    if MAX_DEALS_TO_PROCESS:
+        print(f"\u26a0\ufe0f  Processing limited to {MAX_DEALS_TO_PROCESS} deals")
 
     # Validate country filter
     if args.country and args.country not in COUNTRY_WATCHLIST:
@@ -116,7 +116,10 @@ def main() -> None:
             else list(COUNTRY_WATCHLIST.keys())
         )
         print(f"Countries: {', '.join(countries)}")
-        print(f"MVP cap: {MAX_DEALS_TO_PROCESS} deals")
+        if MAX_DEALS_TO_PROCESS:
+            print(f"Processing cap: {MAX_DEALS_TO_PROCESS} deals")
+        else:
+            print("Processing cap: None (all deals)")
         print("\nWould scrape these sources:")
         for name in scraper_classes:
             print(f"  - {name}")
@@ -176,12 +179,13 @@ def main() -> None:
         batch_mode=args.batch,
     )
 
-    # Classify deals (with MVP cap)
+    # Classify deals
     all_deals: List[Deal] = []
     deal_counter = 0
     seen_parent_countries: set = set()
+    deals_to_process = all_raw_deals[:MAX_DEALS_TO_PROCESS] if MAX_DEALS_TO_PROCESS else all_raw_deals
 
-    for raw in all_raw_deals[:MAX_DEALS_TO_PROCESS]:
+    for raw in deals_to_process:
         try:
             # Get the extracted text (cached Layer 2) for this page
             page_text = _get_extracted_text(raw.source_url)
@@ -227,7 +231,7 @@ def main() -> None:
             generated_at=datetime.utcnow().isoformat() + "Z",
             deals_scanned=len(all_raw_deals),
             deals_processed=len(all_deals),
-            max_items_cap=MAX_DEALS_TO_PROCESS,  # TODO: Remove cap for production
+            max_items_cap=MAX_DEALS_TO_PROCESS,
             date_range_start="2025-01-01",
             date_range_end=datetime.utcnow().strftime("%Y-%m-%d"),
             scraper_version=SCRAPER_VERSION,
@@ -291,7 +295,7 @@ def _write_raw_output(
             "note": "Raw unclassified output — classification not yet run",
             "errors": [e.model_dump() for e in errors],
         },
-        "raw_deals": [d.model_dump() for d in raw_deals[:MAX_DEALS_TO_PROCESS]],
+        "raw_deals": [d.model_dump() for d in (raw_deals[:MAX_DEALS_TO_PROCESS] if MAX_DEALS_TO_PROCESS else raw_deals)],
     }
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)

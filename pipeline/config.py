@@ -6,8 +6,8 @@ from pathlib import Path
 # === Versioning ===
 SCRAPER_VERSION = "1.0.0"
 
-# === MVP Cap ===
-MAX_DEALS_TO_PROCESS = 50  # TODO: Remove cap for production
+# === Processing Limit ===
+MAX_DEALS_TO_PROCESS = None  # No cap — process all scraped deals
 
 # === Paths ===
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
