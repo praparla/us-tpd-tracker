@@ -125,11 +125,12 @@ us-tpd-tracker/
 │   │   │   └── TechAreasView.jsx ← sector-grouped deal view
 │   │   ├── hooks/
 │   │   │   ├── useDeals.js      ← load + derive parent/child hierarchy
-│   │   │   ├── useFilters.js    ← filter state management
+│   │   │   ├── useFilters.js    ← filter state management + activeFilterCount
+│   │   │   ├── useIsMobile.js   ← device detection (matchMedia, 640px breakpoint)
 │   │   │   ├── useCountryStats.js ← per-country aggregation
 │   │   │   └── useSectorGroups.js ← sector grouping logic
 │   │   ├── constants.js         ← colors, enums, status icons, source abbrevs
-│   │   ├── App.jsx              ← hash routing (#deals / #countries / #dashboard)
+│   │   ├── App.jsx              ← hash routing (#dashboard / #deals / #countries), mobile bottom nav
 │   │   └── main.jsx
 │   ├── public/
 │   │   ├── 404.html             ← SPA routing fallback
@@ -215,12 +216,14 @@ us-tpd-tracker/
 **Trigger:** Any task involving React components, Vite config, Tailwind styling, charts, or the `frontend/` directory.
 
 **Responsibilities:**
-- Build the React UI: Deal Table view (hierarchical accordion), Country view, Dashboard view (hero stat + charts), Deal Detail modal.
-- URL hash routing: `#deals` (default) / `#countries` / `#dashboard`.
-- Shared `<FilterPanel />` (country, type, status, sector, keyword search) across all views.
-- `<DealTable />` groups deals by parent TPD with expandable accordion rows. Sub-view toggle: "By Deal" / "By Tech Area".
-- `<CountryView />` groups deals by country with aggregate stats.
-- Dashboard: hero stat banner (total committed value), supporting stat cards, bar chart with LabelList, sector chart.
+- Build the React UI: Dashboard view (default landing), Deal Table view (hierarchical accordion), Country view, Deal Detail modal.
+- URL hash routing: `#dashboard` (default) / `#deals` / `#countries`.
+- Responsive design: desktop nav tabs in header, mobile bottom tab bar. All views adapt via `useIsMobile()` hook.
+- Shared `<FilterPanel />` (country, type, status, sector, keyword search) across all views. On mobile, filters live in a slide-out drawer with badge count.
+- `<DealTable />` groups deals by parent TPD with expandable accordion rows. On mobile, switches to stacked card layout. Sub-view toggle: "By Deal" / "By Tech Area".
+- `<CountryView />` groups deals by country with aggregate stats. Single-column on mobile.
+- Dashboard: hero stat banner (total committed value), supporting stat cards, bar chart with LabelList, sector chart. Charts adapt size and labels for mobile.
+- `<DealModal />` slides up as bottom sheet on mobile, centered dialog on desktop. Locks body scroll when open.
 - 6-tier status system with icon + color badges throughout (SIGNED, COMMITTED, IN_PROGRESS, COMPLETED, STALLED, UNVERIFIED).
 - Source attribution chips (WH, USTR, COM) on deal rows linking to primary source documents.
 - Data freshness shown in header ("Updated [date]").
@@ -229,8 +232,9 @@ us-tpd-tracker/
 - Vite + React 18 + Tailwind CSS v4 only.
 - All data from `data/deals.json` (fetched once at app load). Zero network requests in production.
 - Colors and enums in `constants.js` — never hardcoded inline.
-- Components < 150 lines. Data transforms in `hooks/`, not in components.
+- Data transforms in `hooks/`, not in components.
 - Proper loading, error, and empty states on every view.
+- All new features must work on both mobile (< 640px) and desktop. Use `isMobile` prop from App for layout branching; use Tailwind `sm:` breakpoint for CSS-only adaptations.
 
 ---
 
@@ -344,20 +348,26 @@ All layers ON by default (except Batch which is opt-in). Each layer logs its eff
 
 ## Rule 8: Frontend Standards
 
-- React 18 functional components + hooks. Tailwind CSS v4 only. Colors/enums in `constants.js`. Data transforms in `hooks/`. Components < 150 lines. `lucide-react` icons. Proper loading/error/empty states.
+- React 18 functional components + hooks. Tailwind CSS v4 only. Colors/enums in `constants.js`. Data transforms in `hooks/`. `lucide-react` icons. Proper loading/error/empty states.
 - Status badges use icon + color pill pattern (`DEAL_STATUSES` in constants maps each status to icon name, color, bg, description).
 - Source attribution uses `SOURCE_ABBREV` map in constants (matches `source_documents[0].label` to abbreviated chips).
 - Null values show explicit placeholders ("Value TBD", "Parties TBD") in muted italic — never blank cells.
-- All interactive elements have `focus-visible:ring-2 focus-visible:ring-blue-500`. Modal has Escape-to-close and focus trap.
+- All interactive elements have `focus-visible:ring-2 focus-visible:ring-blue-500`. Modal has Escape-to-close, focus trap, and body scroll lock.
+- **Mobile-first responsive design:** `useIsMobile()` hook (640px breakpoint, `matchMedia` based) passed as `isMobile` prop. Components branch layout for mobile card views vs desktop table views. Use Tailwind `sm:` prefix for CSS-only responsive adjustments.
+- **Mobile navigation:** Bottom tab bar (`fixed bottom-0`) with Dashboard/Deals/Countries icons. Desktop nav hidden on mobile. Main content has `pb-16 sm:pb-0` to avoid overlap.
+- **Mobile filters:** Slide-out drawer triggered by filter icon in header. Badge shows active filter count. Desktop inline filter panel hidden on mobile.
+- **Mobile modal:** Bottom sheet pattern (`items-end`, `rounded-t-xl`, `max-h-[92vh]`) with drag handle. Desktop uses centered dialog.
 
 ## Rule 9: View Toggle Contract
 
 - All views read from the same `useDeals()` hook, which derives parent/child hierarchy.
-- Shared filter state in `App.jsx` (passed as props).
-- URL hash routing: `#deals` (default) / `#countries` / `#dashboard`.
-- Same `<FilterPanel />` and `<DealModal />` across all views.
+- Shared filter state in `App.jsx` (passed as props). `useFilters()` also exposes `activeFilterCount` for the mobile filter badge.
+- URL hash routing: `#dashboard` (default) / `#deals` / `#countries`. Dashboard is the landing page.
+- Nav order: Dashboard → Deals → Countries (both desktop tabs and mobile bottom bar).
+- Same `<FilterPanel />` and `<DealModal />` across all views. On mobile, FilterPanel renders in vertical layout inside a slide-out drawer.
 - Deals view has sub-view toggle: "By Deal" (accordion) / "By Tech Area" (sector groups).
 - Collapsible status legend below filter panel shows all 6 statuses with icon, color, and description.
+- All views receive `isMobile` prop from App and adapt their layout accordingly.
 
 ## Rule 10: Data Contract
 

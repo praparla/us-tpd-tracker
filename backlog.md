@@ -2,6 +2,8 @@
 
 Items identified during UX review of the US Tech Prosperity Deal Tracker frontend.
 
+> **Mobile-first requirement (Feb 2026):** All new features must work on both mobile (< 640px) and desktop. Use `useIsMobile()` hook for JS-level layout branching and Tailwind `sm:` breakpoint for CSS-only adaptations. Components receive `isMobile` prop from App.jsx. See R8 and item #1 for implementation patterns.
+
 ---
 
 ## Section A: UX Research — Competitive Analysis Insights
@@ -69,14 +71,18 @@ Items identified during UX review of the US Tech Prosperity Deal Tracker fronten
 
 ---
 
-### R8. Mobile Card-Based Fallback for DealTable
-- **Observation:** TrumpTradeTracker and Bloomberg Deals both collapse to card layouts on mobile — tables simply don't work on small screens. The card pattern (title, value, status badge, sector tags in a stacked block) is universally used in mobile-first data apps.
-- **Current gap:** This is also in existing item #1 (Mobile Responsiveness), but without the specific "card fallback" paradigm.
-- **UX Paradigm: Responsive information hierarchy.** The table metaphor assumes horizontal space; the card metaphor assumes vertical scrolling. The key insight is that on mobile, users scroll down, not right — so column-based layouts must be converted to stacked key-value pairs. The "card as mobile row" pattern means each deal becomes its own mini-card with the same fields as the table row but stacked vertically.
-- **Effort:** Medium
-- **Note:** Builds on existing item #1 in this backlog.
-- **Suggested prompt:**
-  > In `DealTable.jsx`, implement a responsive card-based layout for mobile screens (below `md:` breakpoint). On mobile, replace the table accordion with a stack of deal cards. Each parent TPD card should show: country flag, title, date signed, total value, and an expand button to reveal child commitment cards below it. Each child card shows: title, parties, value, sector tag, status badge, and source attribution. Use Tailwind's `md:hidden` and `hidden md:block` to switch between card and table views. The filter panel and search should remain visible on mobile and affect both layouts.
+### R8. Mobile Card-Based Fallback for DealTable — DONE
+- **Implemented:** Full mobile-responsive design across all components. `useIsMobile()` hook detects screens < 640px via `matchMedia`. `DealTable` renders stacked card layout on mobile with parent cards showing flag, badges, title, summary, value, date, sector tags, and an expand button to reveal child commitment cards. Child cards show badges, title, parties, commitment details, value, and source chip. Desktop retains the original accordion table layout.
+- **Also implemented as part of this work:**
+  - **Mobile bottom nav:** Fixed bottom tab bar (Dashboard/Deals/Countries) replaces desktop header tabs on mobile.
+  - **Mobile filter drawer:** Slide-out panel triggered by filter icon in header with active filter count badge. Vertical layout with labeled dropdowns.
+  - **Mobile modal:** Bottom sheet pattern (`rounded-t-xl`, drag handle, `max-h-[92vh]`) instead of centered dialog. Single-column info grid. Body scroll lock.
+  - **Dashboard mobile:** Smaller chart heights, smaller fonts, no pie chart labels (legend below instead), compact stat cards.
+  - **CountryView mobile:** Single-column grid, fewer sector tags.
+  - **TechAreasView mobile:** Compact sector headers, simplified expanded deal cards.
+  - **Default view changed:** Dashboard is now the landing page (was Deals). Nav order: Dashboard → Deals → Countries.
+- **Files changed:** `App.jsx`, `DealTable.jsx`, `DealModal.jsx`, `Dashboard.jsx`, `CountryView.jsx`, `TechAreasView.jsx`, `FilterPanel.jsx`, `useFilters.js`, new `hooks/useIsMobile.js`
+- **Lesson:** The `isMobile` prop pattern (hook in App, passed down) works well for layout branching that needs JS logic (chart sizes, conditional rendering). Tailwind `sm:` breakpoint handles the rest (spacing, font sizes, grid columns). Using `matchMedia` with `addEventListener('change')` is more efficient than `resize` event listeners.
 
 ---
 
@@ -89,10 +95,9 @@ Items identified during UX review of the US Tech Prosperity Deal Tracker fronten
 
 ## Priority: High
 
-### 1. Mobile Responsiveness
-- **Issue:** DealTable parent rows use `flex` with many inline elements that overflow on mobile screens. Sector badges are hidden on mobile but the rest of the row still crowds.
-- **Fix:** Stack layout vertically below `sm:` breakpoint. Consider a card-style layout for mobile instead of table rows.
-- **Effort:** Medium
+### 1. Mobile Responsiveness — DONE
+- **Implemented:** Full mobile redesign. See R8 above for details. All components now have dedicated mobile layouts: card-based DealTable, bottom nav bar, filter drawer, bottom-sheet modal, responsive Dashboard charts, single-column CountryView. `useIsMobile()` hook + Tailwind `sm:` breakpoints.
+- **Files changed:** All frontend components + new `useIsMobile.js` hook
 
 ### 2. Keyboard Navigation — DONE
 - **Implemented:** `focus-visible:ring-2 focus-visible:ring-blue-500` on all interactive elements (nav buttons, filter selects, deal rows, modal close, source links). Escape key closes DealModal. Focus trap in modal cycles Tab between first/last focusable elements.
@@ -165,10 +170,9 @@ Items identified during UX review of the US Tech Prosperity Deal Tracker fronten
 - **Fix:** Generate diff between consecutive `deals.json` versions and show a "What's New" banner.
 - **Effort:** Medium
 
-### 15. Collapsible Filter Panel
-- **Issue:** Filter bar always takes vertical space even when not in use, especially on mobile.
-- **Fix:** Collapse to a single "Filters" button on mobile, expand on click. Show active filter count badge.
-- **Effort:** Low
+### 15. Collapsible Filter Panel — DONE
+- **Implemented:** On mobile, filter panel is hidden and replaced with a filter icon button in the header. Tapping it opens a full-height slide-out drawer with vertical filter layout (labeled dropdowns). Active filter count shown as a badge on the icon. Desktop retains the inline horizontal filter bar.
+- **Files changed:** `App.jsx`, `FilterPanel.jsx` (new `vertical` prop), `useFilters.js` (new `activeFilterCount`)
 
 ### 16. Deal Status Workflow Visualization
 - **Issue:** No visual indicator of deal lifecycle progression (Signed -> Committed -> In Progress -> Completed).

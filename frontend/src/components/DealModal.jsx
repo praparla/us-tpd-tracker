@@ -4,7 +4,7 @@ import { COUNTRY_INFO, DEAL_TYPES, DEAL_STATUSES, formatValue, formatDate } from
 
 const STATUS_ICONS = { FileCheck, Handshake, Clock, CheckCircle2, AlertCircle, HelpCircle }
 
-export default function DealModal({ deal, onClose }) {
+export default function DealModal({ deal, onClose, isMobile }) {
   const modalRef = useRef(null)
 
   // Escape key closes modal
@@ -14,6 +14,13 @@ export default function DealModal({ deal, onClose }) {
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [deal, onClose])
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (!deal) return
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [deal])
 
   // Focus trap
   useEffect(() => {
@@ -45,17 +52,28 @@ export default function DealModal({ deal, onClose }) {
   const StatusIcon = STATUS_ICONS[statusInfo.icon]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 sm:items-center" onClick={onClose}>
       <div
         ref={modalRef}
-        className="relative mx-4 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white shadow-2xl"
+        className={`relative w-full overflow-y-auto bg-white shadow-2xl ${
+          isMobile
+            ? 'max-h-[92vh] rounded-t-xl'
+            : 'mx-4 max-h-[85vh] max-w-2xl rounded-xl'
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Drag handle for mobile */}
+        {isMobile && (
+          <div className="flex justify-center py-2">
+            <div className="h-1 w-8 rounded-full bg-gray-300" />
+          </div>
+        )}
+
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-start justify-between border-b border-gray-200 bg-white p-5">
+        <div className={`sticky top-0 z-10 flex items-start justify-between border-b border-gray-200 bg-white ${isMobile ? 'px-4 py-3' : 'p-5'}`}>
           <div className="flex-1 pr-4">
-            <div className="mb-1 flex items-center gap-2">
-              <span className="text-lg">{countryInfo.flag || ''}</span>
+            <div className="mb-1 flex flex-wrap items-center gap-2">
+              <span className={isMobile ? 'text-base' : 'text-lg'}>{countryInfo.flag || ''}</span>
               <span
                 className="rounded-full px-2 py-0.5 text-xs font-medium"
                 style={{ color: typeInfo.color, backgroundColor: typeInfo.bg }}
@@ -70,7 +88,7 @@ export default function DealModal({ deal, onClose }) {
                 {statusInfo.label || deal.status}
               </span>
             </div>
-            <h2 className="text-lg font-semibold text-gray-900">{deal.title}</h2>
+            <h2 className={`font-semibold text-gray-900 ${isMobile ? 'text-base' : 'text-lg'}`}>{deal.title}</h2>
           </div>
           <button
             onClick={onClose}
@@ -81,12 +99,12 @@ export default function DealModal({ deal, onClose }) {
         </div>
 
         {/* Body */}
-        <div className="space-y-4 p-5">
+        <div className={`space-y-4 ${isMobile ? 'px-4 py-4 pb-8' : 'p-5'}`}>
           {/* Summary */}
           <p className="text-sm leading-relaxed text-gray-700">{deal.summary}</p>
 
           {/* Key info grid */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className={`grid gap-2 sm:gap-3 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
             <InfoItem
               icon={DollarSign}
               label="Value"
@@ -165,8 +183,8 @@ export default function DealModal({ deal, onClose }) {
                     className="flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                   >
                     <FileText size={14} />
-                    {doc.label}
-                    <ExternalLink size={12} />
+                    <span className="line-clamp-1">{doc.label}</span>
+                    <ExternalLink size={12} className="flex-shrink-0" />
                   </a>
                 ))}
               </div>

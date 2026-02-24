@@ -1,47 +1,49 @@
 import { useMemo } from 'react'
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, LabelList } from 'recharts'
+import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList } from 'recharts'
 import { TrendingUp, Globe, Briefcase } from 'lucide-react'
 import { COUNTRY_INFO, DEAL_TYPES, CHART_COLORS, formatValue } from '../constants'
 
-export default function Dashboard({ deals, filteredDeals, meta }) {
+export default function Dashboard({ deals, filteredDeals, meta, isMobile }) {
   const stats = useMemo(() => computeStats(filteredDeals), [filteredDeals])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Hero stat banner */}
-      <div className="rounded-xl border border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-center">
-        <p className="text-sm font-medium text-gray-500">Total Committed Investment</p>
-        <p className="mt-1 text-4xl font-bold text-gray-900">{formatValue(stats.totalChildValue)}</p>
-        <p className="mt-1 text-sm text-gray-500">
+      <div className="rounded-xl border border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 text-center sm:p-6">
+        <p className="text-xs font-medium text-gray-500 sm:text-sm">Total Committed Investment</p>
+        <p className="mt-1 text-2xl font-bold text-gray-900 sm:text-4xl">{formatValue(stats.totalChildValue)}</p>
+        <p className="mt-1 text-[10px] text-gray-500 sm:text-sm">
           across {stats.childCount} commitment{stats.childCount !== 1 ? 's' : ''} in {stats.countryCount} TPD partner countr{stats.countryCount !== 1 ? 'ies' : 'y'}
         </p>
       </div>
 
       {/* Supporting stat cards */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
         <StatCard icon={Briefcase} label="Commitments" value={stats.childCount} color="blue" />
-        <StatCard icon={TrendingUp} label="Framework Agreements" value={stats.parentCount} color="green" />
-        <StatCard icon={Globe} label="Countries Tracked" value={stats.countryCount} color="purple" />
+        <StatCard icon={TrendingUp} label="Agreements" value={stats.parentCount} color="green" />
+        <StatCard icon={Globe} label="Countries" value={stats.countryCount} color="purple" />
       </div>
 
       {/* Charts row */}
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
         {/* Value by country */}
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <h3 className="mb-0.5 text-sm font-semibold text-gray-700">
+        <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+          <h3 className="mb-0.5 text-xs font-semibold text-gray-700 sm:text-sm">
             {stats.topCountry
               ? `${stats.topCountry} leads in total committed value`
               : 'Deal Value by Country'}
           </h3>
-          <p className="mb-3 text-xs text-gray-400">Total committed investment per partner country</p>
+          <p className="mb-2 text-[10px] text-gray-400 sm:mb-3 sm:text-xs">Total committed investment per partner country</p>
           {stats.valueByCountry.length > 0 ? (
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={isMobile ? 200 : 250}>
               <BarChart data={stats.valueByCountry}>
-                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                <YAxis tickFormatter={(v) => formatValue(v)} tick={{ fontSize: 11 }} width={70} />
+                <XAxis dataKey="name" tick={{ fontSize: isMobile ? 10 : 12 }} />
+                <YAxis tickFormatter={(v) => formatValue(v)} tick={{ fontSize: isMobile ? 9 : 11 }} width={isMobile ? 55 : 70} />
                 <Tooltip formatter={(v) => formatValue(v)} />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                  <LabelList dataKey="value" position="top" formatter={formatValue} style={{ fontSize: 11, fontWeight: 600, fill: '#374151' }} />
+                  {!isMobile && (
+                    <LabelList dataKey="value" position="top" formatter={formatValue} style={{ fontSize: 11, fontWeight: 600, fill: '#374151' }} />
+                  )}
                   {stats.valueByCountry.map((entry, i) => (
                     <Cell key={i} fill={COUNTRY_INFO[entry.code]?.color || CHART_COLORS[i]} />
                   ))}
@@ -49,16 +51,16 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <EmptyChart />
+            <EmptyChart isMobile={isMobile} />
           )}
         </div>
 
         {/* Deals by type */}
-        <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Deals by Type</h3>
-          <p className="mb-3 text-xs text-gray-400">Distribution of government, business, and trade agreements</p>
+        <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+          <h3 className="mb-0.5 text-xs font-semibold text-gray-700 sm:text-sm">Deals by Type</h3>
+          <p className="mb-2 text-[10px] text-gray-400 sm:mb-3 sm:text-xs">Distribution of government, business, and trade agreements</p>
           {stats.dealsByType.length > 0 ? (
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={isMobile ? 200 : 250}>
               <PieChart>
                 <Pie
                   data={stats.dealsByType}
@@ -66,8 +68,8 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  outerRadius={90}
-                  label={({ name, count }) => `${name} (${count})`}
+                  outerRadius={isMobile ? 65 : 90}
+                  label={isMobile ? false : ({ name, count }) => `${name} (${count})`}
                   labelLine={false}
                 >
                   {stats.dealsByType.map((entry, i) => (
@@ -78,28 +80,39 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <EmptyChart />
+            <EmptyChart isMobile={isMobile} />
+          )}
+          {/* Mobile legend for pie chart */}
+          {isMobile && stats.dealsByType.length > 0 && (
+            <div className="mt-2 flex flex-wrap justify-center gap-3">
+              {stats.dealsByType.map((entry, i) => (
+                <div key={entry.type} className="flex items-center gap-1 text-[10px] text-gray-600">
+                  <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: DEAL_TYPES[entry.type]?.color || CHART_COLORS[i] }} />
+                  {entry.name} ({entry.count})
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
 
       {/* Sector breakdown */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Where the investment goes</h3>
-        <p className="mb-3 text-xs text-gray-400">Technology areas with the most deal activity</p>
+      <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
+        <h3 className="mb-0.5 text-xs font-semibold text-gray-700 sm:text-sm">Where the investment goes</h3>
+        <p className="mb-2 text-[10px] text-gray-400 sm:mb-3 sm:text-xs">Technology areas with the most deal activity</p>
         {stats.sectorData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={isMobile ? Math.min(stats.sectorData.length * 32, 280) : 300}>
             <BarChart data={stats.sectorData} layout="vertical">
-              <XAxis type="number" tick={{ fontSize: 11 }} />
-              <YAxis type="category" dataKey="name" width={180} tick={{ fontSize: 12 }} />
+              <XAxis type="number" tick={{ fontSize: isMobile ? 9 : 11 }} />
+              <YAxis type="category" dataKey="name" width={isMobile ? 110 : 180} tick={{ fontSize: isMobile ? 9 : 12 }} />
               <Tooltip />
               <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]}>
-                <LabelList dataKey="count" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#374151' }} />
+                <LabelList dataKey="count" position="right" style={{ fontSize: isMobile ? 9 : 11, fontWeight: 600, fill: '#374151' }} />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <EmptyChart />
+          <EmptyChart isMobile={isMobile} />
         )}
       </div>
     </div>
@@ -176,23 +189,23 @@ function StatCard({ icon: Icon, label, value, color }) {
     amber: 'bg-amber-50 text-amber-600',
   }
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-4">
-      <div className="flex items-center gap-3">
-        <div className={`rounded-lg p-2 ${colors[color]}`}>
-          <Icon size={18} />
+    <div className="rounded-lg border border-gray-200 bg-white p-2.5 sm:p-4">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <div className={`rounded-lg p-1.5 sm:p-2 ${colors[color]}`}>
+          <Icon size={16} className="sm:h-[18px] sm:w-[18px]" />
         </div>
         <div>
-          <p className="text-xs text-gray-500">{label}</p>
-          <p className="text-lg font-bold text-gray-900">{value}</p>
+          <p className="text-[10px] text-gray-500 sm:text-xs">{label}</p>
+          <p className="text-base font-bold text-gray-900 sm:text-lg">{value}</p>
         </div>
       </div>
     </div>
   )
 }
 
-function EmptyChart() {
+function EmptyChart({ isMobile }) {
   return (
-    <div className="flex h-[250px] items-center justify-center text-sm text-gray-400">
+    <div className={`flex items-center justify-center text-sm text-gray-400 ${isMobile ? 'h-[200px]' : 'h-[250px]'}`}>
       No data to display
     </div>
   )

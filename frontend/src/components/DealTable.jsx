@@ -4,7 +4,7 @@ import { COUNTRY_INFO, DEAL_TYPES, DEAL_STATUSES, SECTOR_INFO, SOURCE_ABBREV, fo
 
 const STATUS_ICONS = { FileCheck, Handshake, Clock, CheckCircle2, AlertCircle, HelpCircle }
 
-export default function DealTable({ parents, childrenByParent, filteredDeals, onSelectDeal }) {
+export default function DealTable({ parents, childrenByParent, filteredDeals, onSelectDeal, isMobile }) {
   const [expanded, setExpanded] = useState({})
 
   const filteredParentIds = new Set(filteredDeals.map((d) => d.parent_id || d.id))
@@ -18,13 +18,150 @@ export default function DealTable({ parents, childrenByParent, filteredDeals, on
 
   if (visibleParents.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-12 text-center">
-        <p className="text-lg font-medium text-gray-600">No deals match your filters</p>
-        <p className="mt-1 text-sm text-gray-400">Try adjusting your search or filter criteria</p>
+      <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-8 text-center sm:p-12">
+        <p className="text-base font-medium text-gray-600 sm:text-lg">No deals match your filters</p>
+        <p className="mt-1 text-xs text-gray-400 sm:text-sm">Try adjusting your search or filter criteria</p>
       </div>
     )
   }
 
+  if (isMobile) {
+    return (
+      <div className="space-y-3">
+        {visibleParents.map((parent) => {
+          const children = (childrenByParent[parent.id] || []).filter((c) =>
+            filteredDeals.some((d) => d.id === c.id)
+          )
+          const isExpanded = expanded[parent.id]
+          const countryInfo = COUNTRY_INFO[parent.country] || {}
+          const totalChildValue = children.reduce((sum, c) => sum + (c.deal_value_usd || 0), 0)
+          const displayValue = parent.deal_value_usd ?? (totalChildValue > 0 ? totalChildValue : null)
+
+          return (
+            <div key={parent.id} className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+              {/* Parent card */}
+              <div className="p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{countryInfo.flag || ''}</span>
+                    <div className="flex flex-wrap items-center gap-1">
+                      <TypeBadge type={parent.type} />
+                      <StatusBadge status={parent.status} />
+                    </div>
+                  </div>
+                  <SourceChip deal={parent} />
+                </div>
+
+                <h3
+                  className="mt-2 cursor-pointer text-sm font-semibold text-gray-900 active:text-blue-600"
+                  onClick={() => onSelectDeal(parent)}
+                >
+                  {parent.title}
+                </h3>
+                <p className="mt-1 line-clamp-2 text-xs text-gray-500">{parent.summary}</p>
+
+                <div className="mt-2 flex items-center justify-between">
+                  <div>
+                    {displayValue != null ? (
+                      <span className="text-sm font-bold text-green-700">{formatValue(displayValue)}</span>
+                    ) : (
+                      <span className="text-xs italic text-gray-400">Gov. Framework</span>
+                    )}
+                    <span className="ml-2 text-xs text-gray-400">{formatDate(parent.date)}</span>
+                  </div>
+                  <button
+                    onClick={() => toggleExpand(parent.id)}
+                    className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-gray-500 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+                    aria-expanded={isExpanded}
+                  >
+                    {children.length} deal{children.length !== 1 ? 's' : ''}
+                    {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </button>
+                </div>
+
+                {/* Sector tags */}
+                {parent.sectors?.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {parent.sectors.slice(0, 3).map((s) => (
+                      <SectorBadge key={s} sector={s} />
+                    ))}
+                    {parent.sectors.length > 3 && (
+                      <span className="text-[10px] text-gray-400">+{parent.sectors.length - 3}</span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Value composition bar */}
+              {isExpanded && totalChildValue > 0 && (
+                <div className="flex h-1 overflow-hidden bg-gray-100">
+                  {children
+                    .filter((c) => c.deal_value_usd)
+                    .map((c) => (
+                      <div
+                        key={c.id}
+                        className="h-full"
+                        style={{
+                          width: `${(c.deal_value_usd / totalChildValue) * 100}%`,
+                          backgroundColor: COUNTRY_INFO[c.country]?.color || '#3b82f6',
+                          opacity: 0.6,
+                        }}
+                      />
+                    ))}
+                </div>
+              )}
+
+              {/* Children cards */}
+              {isExpanded && children.length > 0 && (
+                <div className="border-t border-gray-100 bg-gray-50/50">
+                  {children.map((child) => (
+                    <div
+                      key={child.id}
+                      className="border-b border-gray-100 p-3 pl-4 last:border-b-0 active:bg-gray-100"
+                      onClick={() => onSelectDeal(child)}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-1">
+                            <TypeBadge type={child.type} />
+                            <StatusBadge status={child.status} />
+                          </div>
+                          <p className="mt-1 text-sm text-gray-800">{child.title}</p>
+                          <p className="mt-0.5 text-xs text-gray-500">
+                            {(child.parties || []).length > 0
+                              ? child.parties.join(' & ')
+                              : <span className="italic text-gray-400">Parties TBD</span>
+                            }
+                          </p>
+                          {child.commitment_details && (
+                            <p className="mt-0.5 line-clamp-1 text-[10px] text-gray-400">{child.commitment_details}</p>
+                          )}
+                        </div>
+                        <div className="flex-shrink-0 text-right">
+                          <div className={`text-sm font-medium ${child.deal_value_usd ? 'text-green-700' : 'italic text-gray-400'}`}>
+                            {formatValue(child.deal_value_usd)}
+                          </div>
+                          <SourceChip deal={child} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {isExpanded && children.length === 0 && (
+                <div className="border-t border-gray-100 bg-gray-50/50 px-4 py-3 text-xs text-gray-400">
+                  No child commitments match current filters
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  // Desktop table layout
   return (
     <div className="space-y-3">
       {visibleParents.map((parent) => {

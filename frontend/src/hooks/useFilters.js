@@ -43,5 +43,7 @@ export function useFilters(deals) {
   const filters = { country, type, status, sector, keyword }
   const setters = { setCountry, setType, setStatus, setSector, setKeyword }
 
-  return { filteredDeals, filters, setters, allSectors, allCountries }
+  const activeFilterCount = [country !== 'ALL', type !== 'ALL', status !== 'ALL', sector !== 'ALL', keyword !== ''].filter(Boolean).length
+
+  return { filteredDeals, filters, setters, allSectors, allCountries, activeFilterCount }
 }

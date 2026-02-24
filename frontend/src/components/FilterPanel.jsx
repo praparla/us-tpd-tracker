@@ -1,7 +1,7 @@
 import { Search, X } from 'lucide-react'
 import { COUNTRY_INFO, DEAL_TYPES, DEAL_STATUSES } from '../constants'
 
-export default function FilterPanel({ filters, setters, allSectors, allCountries }) {
+export default function FilterPanel({ filters, setters, allSectors, allCountries, vertical }) {
   const { country, type, status, sector, keyword } = filters
   const { setCountry, setType, setStatus, setSector, setKeyword } = setters
 
@@ -13,6 +13,80 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
     setStatus('ALL')
     setSector('ALL')
     setKeyword('')
+  }
+
+  const selectClass = 'w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-sm outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500'
+
+  if (vertical) {
+    return (
+      <div className="space-y-3">
+        {/* Keyword search */}
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+          <label htmlFor="deal-search-mobile" className="sr-only">Search deals</label>
+          <input
+            id="deal-search-mobile"
+            type="text"
+            placeholder="Search deals..."
+            aria-label="Search deals by keyword"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            className="w-full rounded-md border border-gray-200 bg-gray-50 py-2 pl-8 pr-3 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label className="mb-1 block text-xs font-medium text-gray-500">Country</label>
+          <select value={country} onChange={(e) => setCountry(e.target.value)} className={selectClass}>
+            <option value="ALL">All Countries</option>
+            {allCountries.map((c) => (
+              <option key={c} value={c}>{COUNTRY_INFO[c]?.flag || ''} {COUNTRY_INFO[c]?.name || c}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="mb-1 block text-xs font-medium text-gray-500">Type</label>
+          <select value={type} onChange={(e) => setType(e.target.value)} className={selectClass}>
+            <option value="ALL">All Types</option>
+            {Object.entries(DEAL_TYPES).map(([k, v]) => (
+              <option key={k} value={k}>{v.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="mb-1 block text-xs font-medium text-gray-500">Status</label>
+          <select value={status} onChange={(e) => setStatus(e.target.value)} className={selectClass}>
+            <option value="ALL">All Statuses</option>
+            {Object.entries(DEAL_STATUSES).map(([k, v]) => (
+              <option key={k} value={k}>{v.label}</option>
+            ))}
+          </select>
+        </div>
+
+        {allSectors.length > 0 && (
+          <div>
+            <label className="mb-1 block text-xs font-medium text-gray-500">Sector</label>
+            <select value={sector} onChange={(e) => setSector(e.target.value)} className={selectClass}>
+              <option value="ALL">All Sectors</option>
+              {allSectors.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {hasFilters && (
+          <button
+            onClick={clearAll}
+            className="flex w-full items-center justify-center gap-1 rounded-md border border-gray-200 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+          >
+            <X size={14} /> Clear All Filters
+          </button>
+        )}
+      </div>
+    )
   }
 
   return (
