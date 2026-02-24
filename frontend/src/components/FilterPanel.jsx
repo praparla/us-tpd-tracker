@@ -20,9 +20,12 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
       {/* Keyword search */}
       <div className="relative flex-1 min-w-[200px]">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+        <label htmlFor="deal-search" className="sr-only">Search deals</label>
         <input
+          id="deal-search"
           type="text"
           placeholder="Search deals..."
+          aria-label="Search deals by keyword"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           className="w-full rounded-md border border-gray-200 bg-gray-50 py-1.5 pl-8 pr-3 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
@@ -33,6 +36,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
       <select
         value={country}
         onChange={(e) => setCountry(e.target.value)}
+        aria-label="Filter by country"
         className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
       >
         <option value="ALL">All Countries</option>
@@ -47,6 +51,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
       <select
         value={type}
         onChange={(e) => setType(e.target.value)}
+        aria-label="Filter by deal type"
         className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
       >
         <option value="ALL">All Types</option>
@@ -59,6 +64,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
       <select
         value={status}
         onChange={(e) => setStatus(e.target.value)}
+        aria-label="Filter by deal status"
         className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
       >
         <option value="ALL">All Statuses</option>
@@ -72,6 +78,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
         <select
           value={sector}
           onChange={(e) => setSector(e.target.value)}
+          aria-label="Filter by sector"
           className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
         >
           <option value="ALL">All Sectors</option>

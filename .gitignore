@@ -13,6 +13,7 @@ pipeline/.cache/
 # Frontend
 node_modules/
 dist/
+frontend/test-results/
 
 # Claude local settings
 .claude/settings.local.json

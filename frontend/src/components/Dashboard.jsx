@@ -20,7 +20,8 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Value by country */}
         <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <h3 className="mb-3 text-sm font-semibold text-gray-700">Deal Value by Country</h3>
+          <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Deal Value by Country</h3>
+          <p className="mb-3 text-xs text-gray-400">Total committed investment per partner country</p>
           {stats.valueByCountry.length > 0 ? (
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={stats.valueByCountry}>
@@ -41,7 +42,8 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
 
         {/* Deals by type */}
         <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <h3 className="mb-3 text-sm font-semibold text-gray-700">Deals by Type</h3>
+          <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Deals by Type</h3>
+          <p className="mb-3 text-xs text-gray-400">Distribution of government, business, and trade agreements</p>
           {stats.dealsByType.length > 0 ? (
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
@@ -70,7 +72,8 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
 
       {/* Sector breakdown */}
       <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <h3 className="mb-3 text-sm font-semibold text-gray-700">Top Sectors</h3>
+        <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Top Sectors</h3>
+        <p className="mb-3 text-xs text-gray-400">Technology areas with the most deal activity</p>
         {stats.sectorData.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.sectorData} layout="vertical">

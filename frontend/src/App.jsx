@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react'
-import { RefreshCw, LayoutDashboard, List, Loader2 } from 'lucide-react'
+import { RefreshCw, LayoutDashboard, List, Globe, Loader2 } from 'lucide-react'
+import { VIEW_CAPTIONS } from './constants'
 import { useDeals } from './hooks/useDeals'
 import { useFilters } from './hooks/useFilters'
 import FilterPanel from './components/FilterPanel'
 import DealTable from './components/DealTable'
 import DealModal from './components/DealModal'
 import Dashboard from './components/Dashboard'
+import CountryView from './components/CountryView'
+import TechAreasView from './components/TechAreasView'
 import MVPBanner from './components/MVPBanner'
 
 function getView() {
   const hash = window.location.hash.replace('#', '') || 'deals'
-  return hash === 'dashboard' ? 'dashboard' : 'deals'
+  if (hash === 'dashboard') return 'dashboard'
+  if (hash === 'countries') return 'countries'
+  return 'deals'
 }
 
 export default function App() {
@@ -18,6 +23,7 @@ export default function App() {
   const { filteredDeals, filters, setters, allSectors, allCountries } = useFilters(deals)
   const [view, setView] = useState(getView)
   const [selectedDeal, setSelectedDeal] = useState(null)
+  const [dealSubView, setDealSubView] = useState('byDeal')
 
   useEffect(() => {
     const onHash = () => setView(getView())
@@ -55,6 +61,8 @@ export default function App() {
     )
   }
 
+  const caption = VIEW_CAPTIONS[view]
+
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -76,6 +84,16 @@ export default function App() {
                 }`}
               >
                 <List size={15} /> Deals
+              </button>
+              <button
+                onClick={() => navigate('countries')}
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition ${
+                  view === 'countries'
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <Globe size={15} /> Countries
               </button>
               <button
                 onClick={() => navigate('dashboard')}
@@ -114,13 +132,58 @@ export default function App() {
           allCountries={allCountries}
         />
 
+        {/* View caption */}
+        {caption && (
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-base font-semibold text-gray-900">{caption.title}</h2>
+              <p className="text-xs text-gray-500">{caption.description}</p>
+            </div>
+
+            {/* Sub-view toggle for deals */}
+            {view === 'deals' && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-gray-500">Group by:</span>
+                <div className="flex rounded-md border border-gray-200 bg-gray-50 p-0.5">
+                  <button
+                    onClick={() => setDealSubView('byDeal')}
+                    className={`rounded px-2.5 py-1 text-xs font-medium transition ${
+                      dealSubView === 'byDeal'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    By Deal
+                  </button>
+                  <button
+                    onClick={() => setDealSubView('byTechArea')}
+                    className={`rounded px-2.5 py-1 text-xs font-medium transition ${
+                      dealSubView === 'byTechArea'
+                        ? 'bg-white text-gray-900 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    By Tech Area
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         {view === 'deals' ? (
-          <DealTable
-            parents={parents}
-            childrenByParent={childrenByParent}
-            filteredDeals={filteredDeals}
-            onSelectDeal={setSelectedDeal}
-          />
+          dealSubView === 'byDeal' ? (
+            <DealTable
+              parents={parents}
+              childrenByParent={childrenByParent}
+              filteredDeals={filteredDeals}
+              onSelectDeal={setSelectedDeal}
+            />
+          ) : (
+            <TechAreasView filteredDeals={filteredDeals} onSelectDeal={setSelectedDeal} />
+          )
+        ) : view === 'countries' ? (
+          <CountryView filteredDeals={filteredDeals} onSelectDeal={setSelectedDeal} />
         ) : (
           <Dashboard deals={deals} filteredDeals={filteredDeals} meta={meta} />
         )}
