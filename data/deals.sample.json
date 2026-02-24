@@ -7,8 +7,17 @@
     "date_range_start": "2025-09-01",
     "date_range_end": "2025-12-31",
     "scraper_version": "1.0.0",
-    "countries_tracked": ["GBR", "JPN", "KOR"],
-    "sources_scraped": ["federal_register", "whitehouse", "commerce", "ustr"],
+    "countries_tracked": [
+      "GBR",
+      "JPN",
+      "KOR"
+    ],
+    "sources_scraped": [
+      "federal_register",
+      "whitehouse",
+      "commerce",
+      "ustr"
+    ],
     "cost_optimization": {
       "prefilter_enabled": true,
       "prefilter_skipped": 48,
@@ -35,18 +44,41 @@
       "title": "US-UK Technology Prosperity Deal",
       "summary": "Bilateral technology partnership establishing cooperation in AI, quantum computing, civil nuclear energy, and fusion energy between the US and UK.",
       "type": "TRADE",
-      "status": "ACTIVE",
-      "parties": ["United States", "United Kingdom"],
+      "status": "SIGNED",
+      "parties": [
+        "United States",
+        "United Kingdom"
+      ],
       "deal_value_usd": null,
       "country": "GBR",
       "date": "2025-09-18",
       "date_signed": "2025-09-18",
-      "tags": ["AI", "quantum", "nuclear", "fusion", "research"],
-      "sectors": ["Artificial Intelligence", "Quantum Computing", "Civil Nuclear Energy", "Fusion Energy"],
-      "signatories": ["President Trump", "Prime Minister Starmer"],
+      "tags": [
+        "AI",
+        "quantum",
+        "nuclear",
+        "fusion",
+        "research"
+      ],
+      "sectors": [
+        "Artificial Intelligence",
+        "Quantum Computing",
+        "Civil Nuclear Energy",
+        "Fusion Energy"
+      ],
+      "signatories": [
+        "President Trump",
+        "Prime Minister Starmer"
+      ],
       "source_documents": [
-        {"label": "White House Announcement", "url": "https://www.whitehouse.gov/articles/2025/09/president-trump-signs-technology-prosperity-deal-with-united-kingdom/"},
-        {"label": "MOU Full Text", "url": "https://www.whitehouse.gov/presidential-actions/2025/09/memorandum-of-understanding-between-the-government-of-the-united-states-of-america-and-the-government-of-the-united-kingdom-of-great-britain-and-northern-ireland-regarding-the-technology-prosperity-de/"}
+        {
+          "label": "White House Announcement",
+          "url": "https://www.whitehouse.gov/articles/2025/09/president-trump-signs-technology-prosperity-deal-with-united-kingdom/"
+        },
+        {
+          "label": "MOU Full Text",
+          "url": "https://www.whitehouse.gov/presidential-actions/2025/09/memorandum-of-understanding-between-the-government-of-the-united-states-of-america-and-the-government-of-the-united-kingdom-of-great-britain-and-northern-ireland-regarding-the-technology-prosperity-de/"
+        }
       ],
       "commitment_details": null
     },
@@ -58,14 +90,27 @@
       "title": "Joint AI for Science Research Program",
       "summary": "US and UK to collaborate on a flagship AI for Science research program through DOE, NSF, NIH, and UK counterparts.",
       "type": "GOVERNMENT",
-      "status": "ACTIVE",
-      "parties": ["DOE", "NSF", "NIH", "UKRI", "DSIT"],
+      "status": "SIGNED",
+      "parties": [
+        "DOE",
+        "NSF",
+        "NIH",
+        "UKRI",
+        "DSIT"
+      ],
       "deal_value_usd": null,
       "country": "GBR",
       "date": "2025-09-18",
       "date_signed": null,
-      "tags": ["AI", "research", "science", "healthcare"],
-      "sectors": ["Artificial Intelligence"],
+      "tags": [
+        "AI",
+        "research",
+        "science",
+        "healthcare"
+      ],
+      "sectors": [
+        "Artificial Intelligence"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "Joint research program targeting cancer, rare diseases, chronic disease treatment, and supply chain security."
@@ -78,14 +123,23 @@
       "title": "UK Nuclear Fuel Independence Initiative",
       "summary": "Streamlined reactor licensing and UK nuclear fuel independence from Russia by end of 2028.",
       "type": "GOVERNMENT",
-      "status": "PENDING",
-      "parties": ["US NRC", "UK ONR"],
+      "status": "UNVERIFIED",
+      "parties": [
+        "US NRC",
+        "UK ONR"
+      ],
       "deal_value_usd": null,
       "country": "GBR",
       "date": "2025-09-18",
       "date_signed": null,
-      "tags": ["nuclear", "energy", "licensing"],
-      "sectors": ["Civil Nuclear Energy"],
+      "tags": [
+        "nuclear",
+        "energy",
+        "licensing"
+      ],
+      "sectors": [
+        "Civil Nuclear Energy"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "Reactor design reviews within 2 years, site licensing within 1 year, UK fuel independence by end of 2028."
@@ -98,19 +152,48 @@
       "title": "US-Japan Technology Prosperity Deal",
       "summary": "Comprehensive bilateral tech partnership covering AI, quantum computing, biotechnology, fusion energy, and coordinated export controls.",
       "type": "TRADE",
-      "status": "ACTIVE",
-      "parties": ["United States", "Japan"],
+      "status": "SIGNED",
+      "parties": [
+        "United States",
+        "Japan"
+      ],
       "deal_value_usd": 550000000000,
       "country": "JPN",
       "date": "2025-10-28",
       "date_signed": "2025-10-28",
-      "tags": ["AI", "quantum", "biotech", "fusion", "6G", "investment"],
-      "sectors": ["Artificial Intelligence", "Quantum Computing", "Biotechnology", "Fusion Energy", "6G", "Critical Minerals"],
-      "signatories": ["Director Kratsios", "Minister Onoda Kimi"],
+      "tags": [
+        "AI",
+        "quantum",
+        "biotech",
+        "fusion",
+        "6G",
+        "investment"
+      ],
+      "sectors": [
+        "Artificial Intelligence",
+        "Quantum Computing",
+        "Biotechnology",
+        "Fusion Energy",
+        "6G",
+        "Critical Minerals"
+      ],
+      "signatories": [
+        "Director Kratsios",
+        "Minister Onoda Kimi"
+      ],
       "source_documents": [
-        {"label": "White House TPD Announcement", "url": "https://www.whitehouse.gov/articles/2025/10/the-united-states-signs-technology-prosperity-deals-with-japan-and-korea/"},
-        {"label": "Japan Investment Fact Sheet", "url": "https://www.whitehouse.gov/fact-sheets/2025/10/28195/"},
-        {"label": "Japan MOC Full Text", "url": "https://www.whitehouse.gov/articles/2025/10/u-s-japan-technology-prosperity-deal/"}
+        {
+          "label": "White House TPD Announcement",
+          "url": "https://www.whitehouse.gov/articles/2025/10/the-united-states-signs-technology-prosperity-deals-with-japan-and-korea/"
+        },
+        {
+          "label": "Japan Investment Fact Sheet",
+          "url": "https://www.whitehouse.gov/fact-sheets/2025/10/28195/"
+        },
+        {
+          "label": "Japan MOC Full Text",
+          "url": "https://www.whitehouse.gov/articles/2025/10/u-s-japan-technology-prosperity-deal/"
+        }
       ],
       "commitment_details": null
     },
@@ -122,14 +205,24 @@
       "title": "Japan Critical Energy Infrastructure Investment",
       "summary": "Japanese investment of up to $332 billion for nuclear reactors and power systems in the United States.",
       "type": "BUSINESS",
-      "status": "ACTIVE",
-      "parties": ["Japan", "Various US Energy Companies"],
+      "status": "COMMITTED",
+      "parties": [
+        "Japan",
+        "Various US Energy Companies"
+      ],
       "deal_value_usd": 332000000000,
       "country": "JPN",
       "date": "2025-10-28",
       "date_signed": null,
-      "tags": ["nuclear", "energy", "infrastructure", "investment"],
-      "sectors": ["Critical Energy Infrastructure"],
+      "tags": [
+        "nuclear",
+        "energy",
+        "infrastructure",
+        "investment"
+      ],
+      "sectors": [
+        "Critical Energy Infrastructure"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "Up to $332 billion committed for nuclear reactors and power systems."
@@ -142,14 +235,23 @@
       "title": "Japan AI and Data Center Infrastructure Investment",
       "summary": "Approximately $75 billion in Japanese investment for AI and data center infrastructure.",
       "type": "BUSINESS",
-      "status": "ACTIVE",
-      "parties": ["Various Japanese Tech Companies"],
+      "status": "COMMITTED",
+      "parties": [
+        "Various Japanese Tech Companies"
+      ],
       "deal_value_usd": 75000000000,
       "country": "JPN",
       "date": "2025-10-28",
       "date_signed": null,
-      "tags": ["AI", "data center", "infrastructure", "cloud"],
-      "sectors": ["AI & Data Centers"],
+      "tags": [
+        "AI",
+        "data center",
+        "infrastructure",
+        "cloud"
+      ],
+      "sectors": [
+        "AI & Data Centers"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "Approximately $75 billion for AI and data center infrastructure in the US."
@@ -162,18 +264,41 @@
       "title": "US-Korea Technology Prosperity Deal",
       "summary": "Bilateral tech partnership covering AI, 6G telecommunications, pharmaceutical supply chains, and research security.",
       "type": "TRADE",
-      "status": "ACTIVE",
-      "parties": ["United States", "Republic of Korea"],
+      "status": "SIGNED",
+      "parties": [
+        "United States",
+        "Republic of Korea"
+      ],
       "deal_value_usd": 75000000000,
       "country": "KOR",
       "date": "2025-10-29",
       "date_signed": "2025-10-29",
-      "tags": ["AI", "6G", "biotech", "defense", "investment"],
-      "sectors": ["Artificial Intelligence", "6G Telecommunications", "Pharmaceutical", "Defense"],
-      "signatories": ["President Trump", "Minister Bae Kyung-hoon"],
+      "tags": [
+        "AI",
+        "6G",
+        "biotech",
+        "defense",
+        "investment"
+      ],
+      "sectors": [
+        "Artificial Intelligence",
+        "6G Telecommunications",
+        "Pharmaceutical",
+        "Defense"
+      ],
+      "signatories": [
+        "President Trump",
+        "Minister Bae Kyung-hoon"
+      ],
       "source_documents": [
-        {"label": "White House TPD Announcement", "url": "https://www.whitehouse.gov/articles/2025/10/the-united-states-signs-technology-prosperity-deals-with-japan-and-korea/"},
-        {"label": "Investment Fact Sheet", "url": "https://www.whitehouse.gov/fact-sheets/2025/10/fact-sheet-president-donald-j-trump-brings-home-more-billion-dollar-deals-during-state-visit-to-the-republic-of-korea/"}
+        {
+          "label": "White House TPD Announcement",
+          "url": "https://www.whitehouse.gov/articles/2025/10/the-united-states-signs-technology-prosperity-deals-with-japan-and-korea/"
+        },
+        {
+          "label": "Investment Fact Sheet",
+          "url": "https://www.whitehouse.gov/fact-sheets/2025/10/fact-sheet-president-donald-j-trump-brings-home-more-billion-dollar-deals-during-state-visit-to-the-republic-of-korea/"
+        }
       ],
       "commitment_details": null
     },
@@ -185,14 +310,23 @@
       "title": "Korean Air Boeing Aircraft Purchase",
       "summary": "Korean Air commits to purchasing 103 Boeing aircraft in a landmark aviation deal.",
       "type": "BUSINESS",
-      "status": "ACTIVE",
-      "parties": ["Korean Air", "Boeing"],
+      "status": "COMMITTED",
+      "parties": [
+        "Korean Air",
+        "Boeing"
+      ],
       "deal_value_usd": 36200000000,
       "country": "KOR",
       "date": "2025-10-29",
       "date_signed": null,
-      "tags": ["aviation", "defense", "manufacturing"],
-      "sectors": ["Aviation & Defense"],
+      "tags": [
+        "aviation",
+        "defense",
+        "manufacturing"
+      ],
+      "sectors": [
+        "Aviation & Defense"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "103 aircraft including 30 777-9s, 20 787-10s, 50 737 MAX 10s, and 3 freighters."
@@ -205,14 +339,23 @@
       "title": "GE Aerospace Engine Supply to Korea",
       "summary": "GE Aerospace supplies engines for Korean Air's new Boeing fleet.",
       "type": "BUSINESS",
-      "status": "ACTIVE",
-      "parties": ["GE Aerospace", "Korean Air"],
+      "status": "COMMITTED",
+      "parties": [
+        "GE Aerospace",
+        "Korean Air"
+      ],
       "deal_value_usd": 13700000000,
       "country": "KOR",
       "date": "2025-10-29",
       "date_signed": null,
-      "tags": ["aerospace", "engines", "manufacturing"],
-      "sectors": ["Aviation & Defense"],
+      "tags": [
+        "aerospace",
+        "engines",
+        "manufacturing"
+      ],
+      "sectors": [
+        "Aviation & Defense"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "Engines for Korean Air's Boeing 777-9 and 787-10 fleet."
@@ -225,14 +368,24 @@
       "title": "Amazon AWS Korea Cloud Investment",
       "summary": "Amazon Web Services commits $5 billion investment in South Korea through 2031.",
       "type": "BUSINESS",
-      "status": "ACTIVE",
-      "parties": ["Amazon AWS", "Republic of Korea"],
+      "status": "COMMITTED",
+      "parties": [
+        "Amazon AWS",
+        "Republic of Korea"
+      ],
       "deal_value_usd": 5000000000,
       "country": "KOR",
       "date": "2025-10-29",
       "date_signed": null,
-      "tags": ["cloud", "data center", "AI", "infrastructure"],
-      "sectors": ["Technology & Cloud"],
+      "tags": [
+        "cloud",
+        "data center",
+        "AI",
+        "infrastructure"
+      ],
+      "sectors": [
+        "Technology & Cloud"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "$5 billion cloud infrastructure investment through 2031."
@@ -245,14 +398,24 @@
       "title": "HD Hyundai Shipbuilding Investment",
       "summary": "HD Hyundai and Cerberus Capital commit $5 billion to US shipbuilding capacity.",
       "type": "BUSINESS",
-      "status": "PENDING",
-      "parties": ["HD Hyundai", "Cerberus Capital Management"],
+      "status": "UNVERIFIED",
+      "parties": [
+        "HD Hyundai",
+        "Cerberus Capital Management"
+      ],
       "deal_value_usd": 5000000000,
       "country": "KOR",
       "date": "2025-10-29",
       "date_signed": null,
-      "tags": ["maritime", "shipbuilding", "defense", "manufacturing"],
-      "sectors": ["Maritime & Shipbuilding"],
+      "tags": [
+        "maritime",
+        "shipbuilding",
+        "defense",
+        "manufacturing"
+      ],
+      "sectors": [
+        "Maritime & Shipbuilding"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "$5 billion investment in US shipbuilding and maritime infrastructure."
@@ -265,14 +428,23 @@
       "title": "LS Group Power Infrastructure Investment",
       "summary": "LS Group commits $3 billion in US power infrastructure investment by 2030.",
       "type": "BUSINESS",
-      "status": "PENDING",
-      "parties": ["LS Group"],
+      "status": "UNVERIFIED",
+      "parties": [
+        "LS Group"
+      ],
       "deal_value_usd": 3000000000,
       "country": "KOR",
       "date": "2025-10-29",
       "date_signed": null,
-      "tags": ["energy", "power", "infrastructure", "manufacturing"],
-      "sectors": ["Energy Infrastructure"],
+      "tags": [
+        "energy",
+        "power",
+        "infrastructure",
+        "manufacturing"
+      ],
+      "sectors": [
+        "Energy Infrastructure"
+      ],
       "signatories": [],
       "source_documents": [],
       "commitment_details": "$3 billion in US power infrastructure by 2030."
