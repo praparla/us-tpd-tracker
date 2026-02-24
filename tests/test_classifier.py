@@ -157,7 +157,7 @@ class TestParseResult:
                 "signatories": ["President Trump"],
                 "sectors": ["AI", "6G"],
                 "total_value_usd": 75000000000,
-                "status": "ACTIVE",
+                "status": "SIGNED",
             },
             "children": [],
         }
@@ -174,7 +174,7 @@ class TestParseResult:
                 "title": "Test",
                 "summary": "Test",
                 "country_code": "KOR",
-                "status": "ACTIVE",
+                "status": "SIGNED",
             },
             "children": [
                 {
@@ -184,7 +184,7 @@ class TestParseResult:
                     "deal_value_usd": 36200000000,
                     "sector": "Aviation & Defense",
                     "commitment_details": "103 aircraft",
-                    "status": "ACTIVE",
+                    "status": "COMMITTED",
                 },
                 {
                     "title": "AWS Cloud Investment",
@@ -192,7 +192,7 @@ class TestParseResult:
                     "parties": ["AWS"],
                     "deal_value_usd": 5000000000,
                     "sector": "Technology & Cloud",
-                    "status": "ACTIVE",
+                    "status": "COMMITTED",
                 },
             ],
         }
@@ -205,10 +205,10 @@ class TestParseResult:
     def test_child_ids_sequential(self, classifier: Classifier, sample_raw: RawDeal) -> None:
         data = {
             "is_tpd": True,
-            "parent": {"title": "T", "summary": "S", "country_code": "KOR", "status": "ACTIVE"},
+            "parent": {"title": "T", "summary": "S", "country_code": "KOR", "status": "SIGNED"},
             "children": [
-                {"title": "A", "summary": "A", "status": "ACTIVE"},
-                {"title": "B", "summary": "B", "status": "ACTIVE"},
+                {"title": "A", "summary": "A", "status": "COMMITTED"},
+                {"title": "B", "summary": "B", "status": "COMMITTED"},
             ],
         }
         parent, children = classifier._parse_result(data, sample_raw, "tpd-kor", 2025)

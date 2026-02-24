@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { ChevronDown, ChevronRight } from 'lucide-react'
-import { COUNTRY_INFO, DEAL_TYPES, DEAL_STATUSES, SECTOR_INFO, formatValue, formatDate } from '../constants'
+import { ChevronDown, ChevronRight, ExternalLink, FileCheck, Handshake, Clock, CheckCircle2, AlertCircle, HelpCircle } from 'lucide-react'
+import { COUNTRY_INFO, DEAL_TYPES, DEAL_STATUSES, SECTOR_INFO, SOURCE_ABBREV, formatValue, formatDate } from '../constants'
+
+const STATUS_ICONS = { FileCheck, Handshake, Clock, CheckCircle2, AlertCircle, HelpCircle }
 
 export default function DealTable({ parents, childrenByParent, filteredDeals, onSelectDeal }) {
   const [expanded, setExpanded] = useState({})
@@ -40,7 +42,7 @@ export default function DealTable({ parents, childrenByParent, filteredDeals, on
             <div className="flex items-center gap-3 p-4">
               {/* Chevron: only this toggles expand/collapse */}
               <button
-                className="flex-shrink-0 rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+                className="flex-shrink-0 rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 onClick={() => toggleExpand(parent.id)}
                 aria-expanded={isExpanded}
                 aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${parent.title}`}
@@ -50,7 +52,7 @@ export default function DealTable({ parents, childrenByParent, filteredDeals, on
 
               {/* Card body: opens deal detail modal */}
               <div
-                className="-m-1 flex min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-md p-1 transition hover:bg-blue-50/50"
+                className="-m-1 flex min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-md p-1 transition hover:bg-blue-50/50 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                 onClick={() => onSelectDeal(parent)}
                 role="button"
                 tabIndex={0}
@@ -90,6 +92,8 @@ export default function DealTable({ parents, childrenByParent, filteredDeals, on
                   </span>
                 </div>
               </div>
+
+              <SourceChip deal={parent} />
             </div>
 
             {/* Value composition bar */}
@@ -118,27 +122,35 @@ export default function DealTable({ parents, childrenByParent, filteredDeals, on
                 {children.map((child) => (
                   <div
                     key={child.id}
-                    className="flex cursor-pointer items-center gap-3 border-b border-gray-100 px-4 py-2.5 pl-14 last:border-b-0 hover:bg-gray-100/50"
+                    className="flex cursor-pointer items-center gap-3 border-b border-gray-100 px-4 py-2.5 pl-14 last:border-b-0 hover:bg-gray-100/50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 focus-visible:outline-none"
                     onClick={() => onSelectDeal(child)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelectDeal(child) }}
                   >
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-1.5">
                         <span className="text-sm text-gray-800">{child.title}</span>
                         <TypeBadge type={child.type} />
+                        <StatusBadge status={child.status} />
                         {child.sectors?.[0] && (
                           <SectorBadge sector={child.sectors[0]} className="hidden sm:inline-flex" />
                         )}
                       </div>
                       <p className="mt-0.5 truncate text-xs text-gray-500">
-                        {(child.parties || []).join(' & ')}
+                        {(child.parties || []).length > 0
+                          ? (child.parties.join(' & '))
+                          : <span className="italic text-gray-400">Parties TBD</span>
+                        }
                         {child.commitment_details && ` — ${child.commitment_details}`}
                       </p>
                     </div>
                     <div className="flex-shrink-0 text-right">
-                      <div className={`text-sm font-medium ${child.deal_value_usd ? 'text-green-700' : 'text-gray-400'}`}>
+                      <div className={`text-sm font-medium ${child.deal_value_usd ? 'text-green-700' : 'italic text-gray-400'}`}>
                         {formatValue(child.deal_value_usd)}
                       </div>
                     </div>
+                    <SourceChip deal={child} />
                   </div>
                 ))}
               </div>
@@ -173,12 +185,14 @@ function TypeBadge({ type }) {
 function StatusBadge({ status }) {
   const info = DEAL_STATUSES[status]
   if (!info) return null
+  const Icon = STATUS_ICONS[info.icon]
   return (
     <span
-      className="flex-shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide"
+      className="inline-flex flex-shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide"
       style={{ color: info.color, backgroundColor: info.bg }}
-      title={`Status: ${info.label}`}
+      title={`Status: ${info.label} — ${info.description}`}
     >
+      {Icon && <Icon size={10} />}
       {info.label}
     </span>
   )
@@ -194,5 +208,34 @@ function SectorBadge({ sector, className = '' }) {
     >
       {sector}
     </span>
+  )
+}
+
+function SourceChip({ deal }) {
+  const doc = deal.source_documents?.[0]
+  if (!doc) return null
+
+  let match = null
+  for (const [key, info] of Object.entries(SOURCE_ABBREV)) {
+    if (doc.label.includes(key)) {
+      match = info
+      break
+    }
+  }
+  if (!match) return null
+
+  return (
+    <a
+      href={doc.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-shrink-0 items-center gap-0.5 rounded px-1.5 py-0.5 text-[10px] font-medium transition hover:opacity-80 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+      style={{ color: match.color, backgroundColor: match.bg }}
+      title={doc.label}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {match.abbrev}
+      <ExternalLink size={9} />
+    </a>
   )
 }

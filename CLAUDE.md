@@ -118,15 +118,18 @@ us-tpd-tracker/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── DealTable.jsx    ← hierarchical accordion (parent TPDs → children)
-│   │   │   ├── DealModal.jsx    ← deal detail with source docs
+│   │   │   ├── DealModal.jsx    ← deal detail with source docs, focus trap
 │   │   │   ├── FilterPanel.jsx  ← country, type, status, sector, keyword
-│   │   │   ├── Dashboard.jsx    ← charts (value by country, sector breakdown)
-│   │   │   └── MVPBanner.jsx    ← shown when processing cap is active
+│   │   │   ├── Dashboard.jsx    ← hero stat banner + charts
+│   │   │   ├── CountryView.jsx  ← country-grouped deal cards
+│   │   │   └── TechAreasView.jsx ← sector-grouped deal view
 │   │   ├── hooks/
 │   │   │   ├── useDeals.js      ← load + derive parent/child hierarchy
-│   │   │   └── useFilters.js    ← filter state management
-│   │   ├── constants.js         ← colors, enums, labels, formatValue
-│   │   ├── App.jsx              ← hash routing (#deals / #dashboard)
+│   │   │   ├── useFilters.js    ← filter state management
+│   │   │   ├── useCountryStats.js ← per-country aggregation
+│   │   │   └── useSectorGroups.js ← sector grouping logic
+│   │   ├── constants.js         ← colors, enums, status icons, source abbrevs
+│   │   ├── App.jsx              ← hash routing (#deals / #countries / #dashboard)
 │   │   └── main.jsx
 │   ├── public/
 │   │   ├── 404.html             ← SPA routing fallback
@@ -212,12 +215,15 @@ us-tpd-tracker/
 **Trigger:** Any task involving React components, Vite config, Tailwind styling, charts, or the `frontend/` directory.
 
 **Responsibilities:**
-- Build the React UI: Deal Table view (hierarchical accordion), Dashboard view (charts), Deal Detail modal.
-- URL hash routing: `#deals` (default) / `#dashboard`.
+- Build the React UI: Deal Table view (hierarchical accordion), Country view, Dashboard view (hero stat + charts), Deal Detail modal.
+- URL hash routing: `#deals` (default) / `#countries` / `#dashboard`.
 - Shared `<FilterPanel />` (country, type, status, sector, keyword search) across all views.
-- `<DealTable />` groups deals by parent TPD with expandable accordion rows.
-- Dashboard: total value by country (bar chart), deals by type (pie), sector breakdown.
-- Show `<MVPBanner />` when `meta.max_items_cap` is active.
+- `<DealTable />` groups deals by parent TPD with expandable accordion rows. Sub-view toggle: "By Deal" / "By Tech Area".
+- `<CountryView />` groups deals by country with aggregate stats.
+- Dashboard: hero stat banner (total committed value), supporting stat cards, bar chart with LabelList, sector chart.
+- 6-tier status system with icon + color badges throughout (SIGNED, COMMITTED, IN_PROGRESS, COMPLETED, STALLED, UNVERIFIED).
+- Source attribution chips (WH, USTR, COM) on deal rows linking to primary source documents.
+- Data freshness shown in header ("Updated [date]").
 
 **Constraints:**
 - Vite + React 18 + Tailwind CSS v4 only.
@@ -255,8 +261,7 @@ us-tpd-tracker/
 
 `MAX_DEALS_TO_PROCESS` in `config.py` controls whether a processing cap is applied. Currently set to `None` (no cap — all deals processed). If a cap is needed for development, set it to an integer value. When active:
 - Pipeline stops after cap is reached.
-- Frontend shows `<MVPBanner />` when `meta.max_items_cap` is set.
-- `meta` output includes the cap value.
+- `meta` output includes the cap value (`max_items_cap`).
 - Console at startup: `"Processing limited to {N} deals"`
 
 ## Rule 2: Cost Optimization Pipeline
@@ -340,13 +345,19 @@ All layers ON by default (except Batch which is opt-in). Each layer logs its eff
 ## Rule 8: Frontend Standards
 
 - React 18 functional components + hooks. Tailwind CSS v4 only. Colors/enums in `constants.js`. Data transforms in `hooks/`. Components < 150 lines. `lucide-react` icons. Proper loading/error/empty states.
+- Status badges use icon + color pill pattern (`DEAL_STATUSES` in constants maps each status to icon name, color, bg, description).
+- Source attribution uses `SOURCE_ABBREV` map in constants (matches `source_documents[0].label` to abbreviated chips).
+- Null values show explicit placeholders ("Value TBD", "Parties TBD") in muted italic — never blank cells.
+- All interactive elements have `focus-visible:ring-2 focus-visible:ring-blue-500`. Modal has Escape-to-close and focus trap.
 
 ## Rule 9: View Toggle Contract
 
 - All views read from the same `useDeals()` hook, which derives parent/child hierarchy.
 - Shared filter state in `App.jsx` (passed as props).
-- URL hash routing: `#deals` (default) / `#dashboard`.
+- URL hash routing: `#deals` (default) / `#countries` / `#dashboard`.
 - Same `<FilterPanel />` and `<DealModal />` across all views.
+- Deals view has sub-view toggle: "By Deal" (accordion) / "By Tech Area" (sector groups).
+- Collapsible status legend below filter panel shows all 6 statuses with icon, color, and description.
 
 ## Rule 10: Data Contract
 
@@ -384,7 +395,7 @@ Every pipeline run outputs `data/deals.json` with this shape:
       "title": "US-Korea Technology Prosperity Deal",
       "summary": "Bilateral tech partnership signed Oct 29, 2025...",
       "type": "TRADE",
-      "status": "ACTIVE",
+      "status": "SIGNED",
       "parties": ["United States", "Republic of Korea"],
       "deal_value_usd": 75000000000,
       "country": "KOR",
@@ -404,7 +415,7 @@ Every pipeline run outputs `data/deals.json` with this shape:
       "title": "Korean Air Boeing Aircraft Purchase",
       "summary": "Korean Air commits to purchasing 103 Boeing aircraft",
       "type": "BUSINESS",
-      "status": "ACTIVE",
+      "status": "COMMITTED",
       "parties": ["Korean Air", "Boeing"],
       "deal_value_usd": 36200000000,
       "country": "KOR",
@@ -566,6 +577,9 @@ All pipeline commands need `PYTHONPATH=.` prefix (no setup.py/pyproject.toml).
 
 ### White House URL Instability
 Some whitehouse.gov pages use slug-based URLs (e.g. `/fact-sheet-title-here/`) that can 404 after publication. The numeric URL form (e.g. `/fact-sheets/2025/10/28195/`) is more stable. When adding URLs to `deals.json`, prefer the numeric form when available. The test suite (`test_urls.py`) validates all URLs are well-formed.
+
+### Browser Cache After Deploy
+After pushing to `main`, GitHub Actions rebuilds and deploys the frontend. The live site may still serve stale data due to browser caching. Hard-refresh (`Cmd+Shift+R` on Mac) or use an incognito window to verify the deploy. The `gh-pages` branch showing "N commits behind main" on GitHub is normal — it only holds built frontend files.
 
 ### Git Authentication
 The repo uses HTTPS with a personal access token. To push:

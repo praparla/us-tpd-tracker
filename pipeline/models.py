@@ -18,11 +18,12 @@ class DealType(str, Enum):
 
 
 class DealStatus(str, Enum):
-    ACTIVE = "ACTIVE"
-    PENDING = "PENDING"
+    SIGNED = "SIGNED"
+    COMMITTED = "COMMITTED"
+    IN_PROGRESS = "IN_PROGRESS"
     COMPLETED = "COMPLETED"
-    CANCELLED = "CANCELLED"
-    REPORTED = "REPORTED"
+    STALLED = "STALLED"
+    UNVERIFIED = "UNVERIFIED"
 
 
 class SourceDocument(BaseModel):

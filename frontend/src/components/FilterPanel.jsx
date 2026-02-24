@@ -28,7 +28,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
           aria-label="Search deals by keyword"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          className="w-full rounded-md border border-gray-200 bg-gray-50 py-1.5 pl-8 pr-3 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-200 bg-gray-50 py-1.5 pl-8 pr-3 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
         />
       </div>
 
@@ -37,7 +37,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
         value={country}
         onChange={(e) => setCountry(e.target.value)}
         aria-label="Filter by country"
-        className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
+        className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
       >
         <option value="ALL">All Countries</option>
         {allCountries.map((c) => (
@@ -52,7 +52,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
         value={type}
         onChange={(e) => setType(e.target.value)}
         aria-label="Filter by deal type"
-        className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
+        className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
       >
         <option value="ALL">All Types</option>
         {Object.entries(DEAL_TYPES).map(([k, v]) => (
@@ -65,7 +65,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
         value={status}
         onChange={(e) => setStatus(e.target.value)}
         aria-label="Filter by deal status"
-        className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
+        className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
       >
         <option value="ALL">All Statuses</option>
         {Object.entries(DEAL_STATUSES).map(([k, v]) => (
@@ -79,7 +79,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
           value={sector}
           onChange={(e) => setSector(e.target.value)}
           aria-label="Filter by sector"
-          className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500"
+          className="rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500"
         >
           <option value="ALL">All Sectors</option>
           {allSectors.map((s) => (
@@ -92,7 +92,7 @@ export default function FilterPanel({ filters, setters, allSectors, allCountries
       {hasFilters && (
         <button
           onClick={clearAll}
-          className="flex items-center gap-1 rounded-md px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          className="flex items-center gap-1 rounded-md px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-700 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
         >
           <X size={14} /> Clear
         </button>

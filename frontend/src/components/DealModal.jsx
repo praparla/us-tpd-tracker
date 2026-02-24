@@ -1,16 +1,53 @@
-import { X, ExternalLink, Calendar, Users, DollarSign, Tag, FileText } from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import { X, ExternalLink, Calendar, Users, DollarSign, Tag, FileText, FileCheck, Handshake, Clock, CheckCircle2, AlertCircle, HelpCircle } from 'lucide-react'
 import { COUNTRY_INFO, DEAL_TYPES, DEAL_STATUSES, formatValue, formatDate } from '../constants'
 
+const STATUS_ICONS = { FileCheck, Handshake, Clock, CheckCircle2, AlertCircle, HelpCircle }
+
 export default function DealModal({ deal, onClose }) {
+  const modalRef = useRef(null)
+
+  // Escape key closes modal
+  useEffect(() => {
+    if (!deal) return
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [deal, onClose])
+
+  // Focus trap
+  useEffect(() => {
+    if (!deal || !modalRef.current) return
+    const focusable = modalRef.current.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"])')
+    if (focusable.length > 0) focusable[0].focus()
+
+    const trapFocus = (e) => {
+      if (e.key !== 'Tab' || focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', trapFocus)
+    return () => document.removeEventListener('keydown', trapFocus)
+  }, [deal])
+
   if (!deal) return null
 
   const countryInfo = COUNTRY_INFO[deal.country] || {}
   const typeInfo = DEAL_TYPES[deal.type] || {}
   const statusInfo = DEAL_STATUSES[deal.status] || {}
+  const StatusIcon = STATUS_ICONS[statusInfo.icon]
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={onClose}>
       <div
+        ref={modalRef}
         className="relative mx-4 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
@@ -26,15 +63,19 @@ export default function DealModal({ deal, onClose }) {
                 {typeInfo.label || deal.type}
               </span>
               <span
-                className="rounded-full px-2 py-0.5 text-xs font-medium"
+                className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium"
                 style={{ color: statusInfo.color, backgroundColor: statusInfo.bg }}
               >
+                {StatusIcon && <StatusIcon size={11} />}
                 {statusInfo.label || deal.status}
               </span>
             </div>
             <h2 className="text-lg font-semibold text-gray-900">{deal.title}</h2>
           </div>
-          <button onClick={onClose} className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600">
+          <button
+            onClick={onClose}
+            className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+          >
             <X size={20} />
           </button>
         </div>
@@ -46,16 +87,22 @@ export default function DealModal({ deal, onClose }) {
 
           {/* Key info grid */}
           <div className="grid grid-cols-2 gap-3">
-            {deal.deal_value_usd != null && (
-              <InfoItem icon={DollarSign} label="Value" value={formatValue(deal.deal_value_usd)} />
-            )}
+            <InfoItem
+              icon={DollarSign}
+              label="Value"
+              value={deal.deal_value_usd != null ? formatValue(deal.deal_value_usd) : null}
+              placeholder="Value TBD"
+            />
             <InfoItem icon={Calendar} label="Date" value={formatDate(deal.date)} />
             {deal.date_signed && (
               <InfoItem icon={Calendar} label="Signed" value={formatDate(deal.date_signed)} />
             )}
-            {deal.parties?.length > 0 && (
-              <InfoItem icon={Users} label="Parties" value={deal.parties.join(', ')} />
-            )}
+            <InfoItem
+              icon={Users}
+              label="Parties"
+              value={deal.parties?.length > 0 ? deal.parties.join(', ') : null}
+              placeholder="Parties TBD"
+            />
           </div>
 
           {/* Signatories */}
@@ -75,9 +122,9 @@ export default function DealModal({ deal, onClose }) {
           )}
 
           {/* Sectors */}
-          {deal.sectors?.length > 0 && (
-            <div>
-              <h3 className="mb-1 text-xs font-medium uppercase tracking-wide text-gray-500">Sectors</h3>
+          <div>
+            <h3 className="mb-1 text-xs font-medium uppercase tracking-wide text-gray-500">Sectors</h3>
+            {deal.sectors?.length > 0 ? (
               <div className="flex flex-wrap gap-1.5">
                 {deal.sectors.map((s) => (
                   <span key={s} className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700">
@@ -85,8 +132,10 @@ export default function DealModal({ deal, onClose }) {
                   </span>
                 ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <span className="text-xs italic text-gray-400">Uncategorized</span>
+            )}
+          </div>
 
           {/* Tags */}
           {deal.tags?.length > 0 && (
@@ -113,7 +162,7 @@ export default function DealModal({ deal, onClose }) {
                     href={doc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                    className="flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
                   >
                     <FileText size={14} />
                     {doc.label}
@@ -130,7 +179,7 @@ export default function DealModal({ deal, onClose }) {
               href={deal.source_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+              className="flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 hover:underline focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
             >
               <ExternalLink size={14} />
               View Source
@@ -142,13 +191,17 @@ export default function DealModal({ deal, onClose }) {
   )
 }
 
-function InfoItem({ icon: Icon, label, value }) {
+function InfoItem({ icon: Icon, label, value, placeholder }) {
   return (
     <div className="rounded-lg bg-gray-50 p-2.5">
       <div className="mb-0.5 flex items-center gap-1 text-xs text-gray-500">
         <Icon size={12} /> {label}
       </div>
-      <div className="text-sm font-medium text-gray-900">{value}</div>
+      {value ? (
+        <div className="text-sm font-medium text-gray-900">{value}</div>
+      ) : (
+        <div className="text-sm italic text-gray-400">{placeholder || 'TBD'}</div>
+      )}
     </div>
   )
 }

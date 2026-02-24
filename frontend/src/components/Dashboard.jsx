@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts'
-import { TrendingUp, Globe, Briefcase, DollarSign } from 'lucide-react'
+import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, LabelList } from 'recharts'
+import { TrendingUp, Globe, Briefcase } from 'lucide-react'
 import { COUNTRY_INFO, DEAL_TYPES, CHART_COLORS, formatValue } from '../constants'
 
 export default function Dashboard({ deals, filteredDeals, meta }) {
@@ -8,19 +8,31 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
 
   return (
     <div className="space-y-6">
-      {/* Stat cards */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard icon={Briefcase} label="Total Deals" value={stats.totalDeals} color="blue" />
-        <StatCard icon={DollarSign} label="Total Value" value={formatValue(stats.totalValue)} color="green" />
-        <StatCard icon={Globe} label="Countries" value={stats.countryCount} color="purple" />
-        <StatCard icon={TrendingUp} label="Parent TPDs" value={stats.parentCount} color="amber" />
+      {/* Hero stat banner */}
+      <div className="rounded-xl border border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-center">
+        <p className="text-sm font-medium text-gray-500">Total Committed Investment</p>
+        <p className="mt-1 text-4xl font-bold text-gray-900">{formatValue(stats.totalChildValue)}</p>
+        <p className="mt-1 text-sm text-gray-500">
+          across {stats.childCount} commitment{stats.childCount !== 1 ? 's' : ''} in {stats.countryCount} TPD partner countr{stats.countryCount !== 1 ? 'ies' : 'y'}
+        </p>
+      </div>
+
+      {/* Supporting stat cards */}
+      <div className="grid grid-cols-3 gap-4">
+        <StatCard icon={Briefcase} label="Commitments" value={stats.childCount} color="blue" />
+        <StatCard icon={TrendingUp} label="Framework Agreements" value={stats.parentCount} color="green" />
+        <StatCard icon={Globe} label="Countries Tracked" value={stats.countryCount} color="purple" />
       </div>
 
       {/* Charts row */}
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Value by country */}
         <div className="rounded-lg border border-gray-200 bg-white p-4">
-          <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Deal Value by Country</h3>
+          <h3 className="mb-0.5 text-sm font-semibold text-gray-700">
+            {stats.topCountry
+              ? `${stats.topCountry} leads in total committed value`
+              : 'Deal Value by Country'}
+          </h3>
           <p className="mb-3 text-xs text-gray-400">Total committed investment per partner country</p>
           {stats.valueByCountry.length > 0 ? (
             <ResponsiveContainer width="100%" height={250}>
@@ -29,6 +41,7 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
                 <YAxis tickFormatter={(v) => formatValue(v)} tick={{ fontSize: 11 }} width={70} />
                 <Tooltip formatter={(v) => formatValue(v)} />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                  <LabelList dataKey="value" position="top" formatter={formatValue} style={{ fontSize: 11, fontWeight: 600, fill: '#374151' }} />
                   {stats.valueByCountry.map((entry, i) => (
                     <Cell key={i} fill={COUNTRY_INFO[entry.code]?.color || CHART_COLORS[i]} />
                   ))}
@@ -72,7 +85,7 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
 
       {/* Sector breakdown */}
       <div className="rounded-lg border border-gray-200 bg-white p-4">
-        <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Top Sectors</h3>
+        <h3 className="mb-0.5 text-sm font-semibold text-gray-700">Where the investment goes</h3>
         <p className="mb-3 text-xs text-gray-400">Technology areas with the most deal activity</p>
         {stats.sectorData.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
@@ -80,7 +93,9 @@ export default function Dashboard({ deals, filteredDeals, meta }) {
               <XAxis type="number" tick={{ fontSize: 11 }} />
               <YAxis type="category" dataKey="name" width={180} tick={{ fontSize: 12 }} />
               <Tooltip />
-              <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]}>
+                <LabelList dataKey="count" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#374151' }} />
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         ) : (
@@ -96,10 +111,13 @@ function computeStats(deals) {
   const totalValue = deals.reduce((sum, d) => sum + (d.deal_value_usd || 0), 0)
   const countries = new Set(deals.map((d) => d.country))
   const parentCount = deals.filter((d) => !d.parent_id).length
+  const children = deals.filter((d) => d.parent_id)
+  const childCount = children.length
+  const totalChildValue = children.reduce((sum, d) => sum + (d.deal_value_usd || 0), 0)
 
-  // Value by country
+  // Value by country (child deals only for accurate committed value)
   const countryMap = {}
-  for (const d of deals) {
+  for (const d of children) {
     if (!countryMap[d.country]) countryMap[d.country] = 0
     countryMap[d.country] += d.deal_value_usd || 0
   }
@@ -110,6 +128,8 @@ function computeStats(deals) {
       value,
     }))
     .sort((a, b) => b.value - a.value)
+
+  const topCountry = valueByCountry.length > 0 ? valueByCountry[0].name : null
 
   // Deals by type
   const typeMap = {}
@@ -137,8 +157,11 @@ function computeStats(deals) {
   return {
     totalDeals,
     totalValue,
+    totalChildValue,
+    childCount,
     countryCount: countries.size,
     parentCount,
+    topCountry,
     valueByCountry,
     dealsByType,
     sectorData,

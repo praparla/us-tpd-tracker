@@ -14,11 +14,12 @@ export const DEAL_TYPES = {
 }
 
 export const DEAL_STATUSES = {
-  ACTIVE: { label: 'Active', color: '#059669', bg: '#d1fae5' },
-  PENDING: { label: 'Pending', color: '#d97706', bg: '#fef3c7' },
-  COMPLETED: { label: 'Completed', color: '#6b7280', bg: '#f3f4f6' },
-  CANCELLED: { label: 'Cancelled', color: '#dc2626', bg: '#fee2e2' },
-  REPORTED: { label: 'Reported', color: '#7c3aed', bg: '#ede9fe' },
+  SIGNED:      { label: 'Signed',      color: '#2563eb', bg: '#dbeafe', icon: 'FileCheck',    description: 'Framework agreement formally signed' },
+  COMMITTED:   { label: 'Committed',   color: '#059669', bg: '#d1fae5', icon: 'Handshake',    description: 'Investment commitment publicly announced' },
+  IN_PROGRESS: { label: 'In Progress', color: '#d97706', bg: '#fef3c7', icon: 'Clock',        description: 'Implementation actively underway' },
+  COMPLETED:   { label: 'Completed',   color: '#10b981', bg: '#d1fae5', icon: 'CheckCircle2', description: 'Commitment fulfilled or delivered' },
+  STALLED:     { label: 'Stalled',     color: '#dc2626', bg: '#fee2e2', icon: 'AlertCircle',  description: 'Progress halted or blocked' },
+  UNVERIFIED:  { label: 'Unverified',  color: '#6b7280', bg: '#f3f4f6', icon: 'HelpCircle',   description: 'Status not independently confirmed' },
 }
 
 export const SECTOR_INFO = {
@@ -58,10 +59,19 @@ export const VIEW_CAPTIONS = {
   },
 }
 
+export const SOURCE_ABBREV = {
+  'White House': { abbrev: 'WH', color: '#1e40af', bg: '#dbeafe' },
+  'Commerce': { abbrev: 'COM', color: '#047857', bg: '#d1fae5' },
+  'USTR': { abbrev: 'USTR', color: '#7c3aed', bg: '#ede9fe' },
+  'Federal Register': { abbrev: 'FR', color: '#b45309', bg: '#fef3c7' },
+  'MOU': { abbrev: 'MOU', color: '#6b7280', bg: '#f3f4f6' },
+  'Fact Sheet': { abbrev: 'WH', color: '#1e40af', bg: '#dbeafe' },
+}
+
 export const CHART_COLORS = ['#2563eb', '#dc2626', '#059669', '#d97706', '#7c3aed', '#0891b2']
 
 export function formatValue(value) {
-  if (value == null) return 'Undisclosed'
+  if (value == null) return 'Value TBD'
   if (value >= 1_000_000_000) return `$${(value / 1_000_000_000).toFixed(1)}B`
   if (value >= 1_000_000) return `$${(value / 1_000_000).toFixed(0)}M`
   if (value >= 1_000) return `$${(value / 1_000).toFixed(0)}K`

@@ -37,14 +37,15 @@ class TestDealStatus:
     """Test DealStatus enum."""
 
     def test_valid_values(self) -> None:
-        assert DealStatus.ACTIVE == "ACTIVE"
-        assert DealStatus.PENDING == "PENDING"
+        assert DealStatus.SIGNED == "SIGNED"
+        assert DealStatus.COMMITTED == "COMMITTED"
+        assert DealStatus.IN_PROGRESS == "IN_PROGRESS"
         assert DealStatus.COMPLETED == "COMPLETED"
-        assert DealStatus.CANCELLED == "CANCELLED"
-        assert DealStatus.REPORTED == "REPORTED"
+        assert DealStatus.STALLED == "STALLED"
+        assert DealStatus.UNVERIFIED == "UNVERIFIED"
 
-    def test_all_five_statuses(self) -> None:
-        assert len(DealStatus) == 5
+    def test_all_six_statuses(self) -> None:
+        assert len(DealStatus) == 6
 
 
 class TestSourceDocument:
@@ -93,7 +94,7 @@ class TestDeal:
             title="US-Japan TPD",
             summary="Test",
             type=DealType.TRADE,
-            status=DealStatus.ACTIVE,
+            status=DealStatus.SIGNED,
             date="2025-10-28",
         )
         assert deal.parent_id is None
@@ -108,7 +109,7 @@ class TestDeal:
             title="Korean Air Boeing Purchase",
             summary="Test",
             type=DealType.BUSINESS,
-            status=DealStatus.ACTIVE,
+            status=DealStatus.SIGNED,
             date="2025-10-29",
             deal_value_usd=36200000000,
             parties=["Korean Air", "Boeing"],
@@ -124,7 +125,7 @@ class TestDeal:
                 title="Test",
                 summary="Test",
                 type="INVALID",  # type: ignore
-                status=DealStatus.ACTIVE,
+                status=DealStatus.SIGNED,
                 date="2025-01-01",
             )
 
@@ -147,7 +148,7 @@ class TestDeal:
             title="Test",
             summary="Test",
             type=DealType.TRADE,
-            status=DealStatus.ACTIVE,
+            status=DealStatus.SIGNED,
             date="2025-01-01",
         )
         assert deal.country == "USA"
@@ -207,7 +208,7 @@ class TestDealsOutput:
             title="Test",
             summary="Test",
             type=DealType.TRADE,
-            status=DealStatus.ACTIVE,
+            status=DealStatus.SIGNED,
             date="2025-01-01",
         )
         output = DealsOutput(
